@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tools import count
+from tools import indicator
 
 
 class Loss(object):
@@ -8,8 +9,9 @@ class Loss(object):
 
     @staticmethod
     def loss_l2(estimated, target):
+        """estimated and target are dense tensors"""
         with tf.name_scope('l2_loss'):
-            with tf.control_dependencies([tf.assert_equal(count(tf.to_int32(target) - tf.to_int32(estimated)), 0.)]):
+            with tf.control_dependencies([tf.assert_equal(count(indicator(target) - indicator(estimated)), 0.)]):
                 squared_difference = tf.pow(estimated - target, 2, name='squared_difference')
                 loss = tf.reduce_sum(squared_difference, name='summing_square_errors')
                 return loss

@@ -2,14 +2,13 @@ import numpy as np
 from sklearn.cross_validation import train_test_split
 from scipy.sparse import csr_matrix
 from tools import global_parameters
-from autoencoder.Dataset import Dataset
 
 
 class Import(object):
     def __init__(self, validation_ratio, test_ratio, database):
         self.validation_ratio = validation_ratio
         self.test_ratio = test_ratio
-        self.nb_users = 0
+        self.nb_users, self.nb_movies = global_parameters(database)[0:2]
         self.database = database
 
     @staticmethod
@@ -103,7 +102,7 @@ class Import(object):
         full_dataset = self.full_import(database_id=self.database)
         train, validation, test = self.split_dataset(dataset=full_dataset)
         train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation, test)
-        return Dataset(train_normalised_sets), Dataset(validation_normalised_sets), Dataset(test_normalised_sets)
+        return [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
 
     def shape(self):
         nb_users = global_parameters(self.database)[0]
@@ -118,3 +117,7 @@ class Import(object):
     @staticmethod
     def to_sparse2(indices, indptr, values, shape):
         return csr_matrix((values, indices, indptr), shape=shape)
+
+    @staticmethod
+    def to_sparse3(rows, columns, values, shape):
+        return csr_matrix((values, (rows, columns)), shape=shape)
