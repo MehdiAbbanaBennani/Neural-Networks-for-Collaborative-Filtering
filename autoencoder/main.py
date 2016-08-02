@@ -14,9 +14,7 @@ sets_parameters = {'database_id': 1,
                    'test_ratio': 0.,
                    'validation_ratio': 0.1}
 
-Import = Import(database=sets_parameters['database_id'],
-                test_ratio=sets_parameters['test_ratio'],
-                validation_ratio=sets_parameters['validation_ratio'])
+Import = Import(sets_parameters=sets_parameters)
 
 autoencoder_sets = Import.run()
 
