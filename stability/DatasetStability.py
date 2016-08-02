@@ -7,22 +7,30 @@ from tools import global_parameters
 
 # TODO square differences instead of rmse
 class DatasetStability(Dataset):
-    def __init__(self, dataset, differences, probability, rmse, subsets_number, landa_array, database_id):
+    def __init__(self, dataset, sets_parameters, stability_parameters):
 
         super().__init__(dataset)
 
-        self.nb_users, self.nb_movies = global_parameters(database=database_id)[0:2]
+        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
 
-        self.differences = differences
-        self.probability = probability
-        self.rmse = rmse
-        self.subsets_number = subsets_number
-        self.landa_array = landa_array
+        self.differences = stability_parameters['differences']
+        self.probability = stability_parameters['probability']
+        self.rmse = stability_parameters['rmse']
+        self.subsets_number = stability_parameters['subsets_number']
+        self.landa_array = stability_parameters['landa_array']
 
-        assert np.sum(landa_array) == 1
-        assert np.size(landa_array) == subsets_number + 1
+        assert np.sum(self.landa_array) == 1
+        assert np.size(self.landa_array) == self.subsets_number + 1
 
-        self.coefficients_matrix = self.run()
+        self.coefficients = self.run()
+        
+        self.category_indices = {'user': 0, 'rmse': 1, 'coefficients': 2}
+        self.category_matrix = {'user': self.ratings,
+                                'rmse': self.ratings, 
+                                'coefficients': self.coefficients}
+        self.category_permute = {'user': self.permute,
+                                 'rmse': self.identity,
+                                 'coefficients': self.permute}
 
     def omega_p_build(self):
         probabilities = np.random.rand(self.nb_elements)
@@ -54,7 +62,7 @@ class DatasetStability(Dataset):
 
         return loss_coefficients
 
-    def coefficients_matrix(self, loss_coefficients):
+    def coefficients(self, loss_coefficients):
         indices_cols = self.ratings.indices
         indices_rows = self.sparse_indices(self.ratings)
         return csr_matrix((loss_coefficients, (indices_rows, indices_cols)),
@@ -65,5 +73,11 @@ class DatasetStability(Dataset):
         omega_p_coefficients = self.random_division(omega_p_set)
         loss_coefficients = self.loss_coefficients(omega_p_set=omega_p_set,
                                                    omega_p_coefficients=omega_p_coefficients)
-        coefficients_matrix = self.coefficients_matrix(loss_coefficients=loss_coefficients)
-        return coefficients_matrix
+        coefficients = self.coefficients(loss_coefficients=loss_coefficients)
+        return coefficients
+    
+    def next_batch_train_stability(self, batch_size):
+        start, end = self.next_range(batch_size, 'user')
+        indices_user, values_user = self.subset(start, end, 'user')
+        indices_coefficients, values_coefficients = self.subset(start, end, 'coefficients')
+        return indices_user, values_user, indices_coefficients, values_coefficients

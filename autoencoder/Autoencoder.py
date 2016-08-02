@@ -1,4 +1,4 @@
-from autoencoder.Import import Import
+from autoencoder.Dataset import Dataset
 from autoencoder.Train import Train
 from autoencoder.Loss import Loss
 from autoencoder.Evaluation import Evaluation
@@ -10,28 +10,25 @@ import tensorflow as tf
 
 
 class Autoencoder(object):
-    def __init__(self, database_id, hidden1_units, regularisation, learning_rate0, learning_decay, batch_size_evaluate,
-                 batch_size_train, nb_epoch):
+    def __init__(self, autoencoder_parameters, autoencoder_sets, sets_parameters):
 
-        self.database = database_id
-        self.hidden1_units = hidden1_units
-        self.regularisation = regularisation
-        self.learning_rate0 = learning_rate0
-        self.learning_decay = learning_decay
-        self.batch_size_evaluate = batch_size_evaluate
-        self.batch_size_train = batch_size_train
-        self.nb_users, self.nb_movies = global_parameters(database=database_id)[0:2]
+        self.database = sets_parameters['database_id']
+        self.hidden1_units = autoencoder_parameters['hidden1_units']
+        self.regularisation = autoencoder_parameters['regularisation']
+        self.learning_rate0 = autoencoder_parameters['learning_rate0']
+        self.learning_decay = autoencoder_parameters['learning_decay']
+        self.batch_size_evaluate = autoencoder_parameters['batch_size_evaluate']
+        self.batch_size_train = autoencoder_parameters['batch_size_train']
+        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
 
         self.rmse = 0
 
         self.epoch_steps = int(self.nb_users / self.batch_size_train)
-        self.nb_steps = nb_epoch * self.epoch_steps
+        self.nb_steps = autoencoder_parameters['nb_epoch'] * self.epoch_steps
 
-        self.Import = Import(database=self.database,
-                             test_ratio=0.,
-                             validation_ratio=0.1)
-
-        self.Train_set, self.Validation_set, self.Test_set = self.Import.run()
+        self.Train_set = Dataset(autoencoder_sets[0])
+        self.Validation_set = Dataset(autoencoder_sets[1])
+        self.Test_set = Dataset(autoencoder_sets[2])
 
         self.Loss = Loss()
 
@@ -88,7 +85,7 @@ class Autoencoder(object):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-                if step % (14 * self.epoch_steps) == 0:
+                if step % (1 * self.epoch_steps) == 0:
                     print('epoch ' + str(epoch))
                     # saver.save(sess, summary_folder('checkpoints'), global_step=step)
 

@@ -26,7 +26,7 @@ def global_parameters(database):
 
 
 def summary_folder(name):
-    logdir = '/home/mehdi/PycharmProjects/Autoencoder/Neural-Network-Collaborative-Filtering/tmp/' + name
+    logdir = '/home/sequel/Pycharm project/Autoencoder_Stability/tmp/' + name
     folder = OSFS(logdir)
     test_n = len(list(n for n in folder.listdir() if n.startswith('test')))
     return logdir + "/test" + str(test_n + 1)
@@ -53,12 +53,29 @@ def log_folder():
 
 
 def variable_summaries(var, name):
-  with tf.name_scope(name + 'summaries'):
-    mean = tf.reduce_mean(var)
+    with tf.name_scope(name + 'summaries'):
+        mean = tf.reduce_mean(var)
     tf.scalar_summary(name + 'mean', mean)
     with tf.name_scope(name + 'stddev'):
-      stddev = tf.sqrt(tf.reduce_sum(tf.square(var - mean)))
+        stddev = tf.sqrt(tf.reduce_sum(tf.square(var - mean)))
     tf.scalar_summary(name + 'sttdev', stddev)
     tf.scalar_summary(name + 'max', tf.reduce_max(var))
     tf.scalar_summary(name + 'min', tf.reduce_min(var))
     tf.histogram_summary(name, var)
+
+
+def indicator(dense_tensor):
+    with tf.name_scope('to_indicator'):
+        indicator_tensor = tf.to_int32(tf.cast(dense_tensor, tf.bool, name='to_bool'), name='to_int')
+        return indicator_tensor
+
+
+def sparse_indices(matrix):
+    index = 0
+    indices = []
+    for k in range(matrix.shape[0]):
+        length = matrix.indptr[index + 1] - matrix.indptr[index]
+        to_add = np.ones(length) * index
+        indices = np.append(indices, to_add)
+        index += 1
+    return indices

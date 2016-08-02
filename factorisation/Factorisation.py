@@ -5,17 +5,17 @@ from scipy.sparse import csr_matrix
 
 
 class Factorisation(object):
-    def __init__(self, TrainSet, ValidationSet, dimension, iterations, landa, database_id):
+    def __init__(self, factorisation_sets, factorisation_parameters, sets_parameters):
 
-        self.nb_users, self.nb_movies = global_parameters(database=database_id)[0:2]
+        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
 
-        self.dimension = dimension
-        self.iterations = iterations
-        self.landa = landa
+        self.dimension = factorisation_parameters['dimension']
+        self.iterations = factorisation_parameters['iterations']
+        self.landa = factorisation_parameters['landa']
 
-        self.TrainSet = TrainSet
-        self.TrainSet_movies = TrainSet.transpose(copy=True).tocsr()
-        self.ValidationSet = ValidationSet
+        self.train_set = factorisation_sets[0]
+        self.TrainSet_movies = factorisation_sets[0].transpose(copy=True).tocsr()
+        self.validation_set = factorisation_sets[1]
 
         self.R = np.empty((self.nb_users, self.nb_movies))
         self.U = np.random.rand(self.dimension, self.nb_users)
@@ -38,12 +38,12 @@ class Factorisation(object):
         while iteration < self.iterations:
             # Estimation of U
             for i in range(0, self.nb_users):
-                indices = self.TrainSet.getrow(i).indices
+                indices = self.train_set.getrow(i).indices
 
                 self.U[:, i] = np.linalg.solve(np.dot(np.transpose(self.V[indices, :]), 
                                                       self.V[indices, :]) + self.landa * I,
                                                np.dot(np.transpose(self.V[indices, :]),
-                                                      np.transpose(self.TrainSet.getrow(i).data)))
+                                                      np.transpose(self.train_set.getrow(i).data)))
             # Estimation of V
             for i in range(0, self.nb_movies):
                 indices = self.TrainSet_movies.getrow(i).indices
@@ -52,33 +52,42 @@ class Factorisation(object):
                                     np.dot(self.U[:, indices], self.TrainSet_movies.getrow(i).data))
                 self.V[i, :] = np.transpose(S)
             iteration += 1
-    
-    def evaluation(self):
-        error = 0
-        row_indices = self.sparse_indices(self.ValidationSet)
 
-        for s in range(0, np.size(self.ValidationSet.data)):
-            i = int(row_indices[s])
-            j = int(self.ValidationSet.indices[s])
-            RT = self.ValidationSet.data[s]
-            Rij = np.dot(self.U[:, i], self.V[j, :])
-            error += math.pow((Rij - RT), 2)
-        error /= np.size(self.ValidationSet.data)
+    def evaluation(self, DataSet):
+        differences = self.differences(DataSet)
+        differences = np.power(differences, 2)
+        error = np.mean(differences)
         error = math.sqrt(error)
         return error
+
+    def differences(self, DataSet):
+        row_indices = self.sparse_indices(DataSet)
+        differences = []
+
+        for s in range(0, np.size(DataSet.data)):
+            i = int(row_indices[s])
+            j = int(DataSet.indices[s])
+            RT = DataSet.data[s]
+            Rij = np.dot(self.U[:, i], self.V[j, :])
+            differences = np.append(differences, [(RT - Rij)])
+        return differences
+
+    def difference_matrix_build(self, Dataset):
+        differences_values = self.differences(Dataset)
+        indices_rows = self.sparse_indices(Dataset)
+        indices_cols = Dataset.indices
+        return csr_matrix((differences_values, (indices_rows, indices_cols)), shape=(self.nb_users, self.nb_movies))
 
     def run(self):
         print("Factorisation")
         self.initializing()
         print("Training ...")
         self.training()
-        print("Training completed")
+        print("Training complete")
         print("Evaluating")
-        rmse = self.evaluation()
-        print("Evaluation completed")
-        print(rmse)
-        difference_matrix = self.TrainSet.copy()
-        difference_matrix.data -= rmse
+        rmse = self.evaluation(self.validation_set)
+        print("Evaluation complete")
+        difference_matrix = self.difference_matrix_build(self.train_set)
         return rmse, difference_matrix
     
     @staticmethod

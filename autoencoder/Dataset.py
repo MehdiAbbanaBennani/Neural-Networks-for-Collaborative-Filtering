@@ -8,12 +8,12 @@ class Dataset(object): # Checked
         self.size = dataset[0].shape[0]
         self.nb_elements = self.ratings.nnz
 
+        self.identity = np.arange(self.size)
+        self.permute = np.arange(self.size)
+
         self.index_completed = np.zeros(4, dtype=int)
         self.last_batch_size = np.zeros(4, dtype=int)
         self.epoch_completed = np.ones(4, dtype=int) * -1
-
-        self.identity = np.arange(self.size)
-        self.permute = np.arange(self.size)
 
         self.category_indices = {'user': 0, 'rmse': 1}
         self.category_matrix = {'user': self.ratings,

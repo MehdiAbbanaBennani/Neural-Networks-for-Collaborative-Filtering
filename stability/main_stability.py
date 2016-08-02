@@ -1,13 +1,12 @@
-from factorisation.Factorisation import Factorisation
-from factorisation.ImportFactorisation import ImportFactorisation
-from Stability.DatasetStability import DatasetStability
+from stability.ImportStability import ImportStability
+from stability.DatasetStability import DatasetStability
 
 database_id = 0
 
-Import = ImportFactorisation(validation_ratio=0.1,
-                             test_ratio=0,
-                             database_id=database_id)
-TrainSet, ValidationSet, TestSet = Import.run()
+Import = ImportStability(validation_ratio=0.1,
+                         test_ratio=0.1,
+                         database_id=database_id)
+Factorisation = Import.run()
 Factorization = Factorisation(TrainSet=TrainSet,
                               ValidationSet=ValidationSet,
                               database_id=database_id,
