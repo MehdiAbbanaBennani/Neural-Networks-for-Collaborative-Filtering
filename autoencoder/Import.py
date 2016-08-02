@@ -5,11 +5,11 @@ from tools import global_parameters
 
 
 class Import(object):
-    def __init__(self, validation_ratio, test_ratio, database):
-        self.validation_ratio = validation_ratio
-        self.test_ratio = test_ratio
-        self.nb_users, self.nb_movies = global_parameters(database)[0:2]
-        self.database = database
+    def __init__(self, sets_parameters):
+        self.validation_ratio = sets_parameters['validation_ratio']
+        self.test_ratio = sets_parameters['test_ratio']
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters['database_id'])[0:2]
+        self.database_id = sets_parameters['database_id']
 
     @staticmethod
     def full_import(database_id):
@@ -99,14 +99,14 @@ class Import(object):
         return train_normalised_sets, validation_normalised_sets, test_normalised_sets
 
     def run(self):
-        full_dataset = self.full_import(database_id=self.database)
+        full_dataset = self.full_import(database_id=self.database_id)
         train, validation, test = self.split_dataset(dataset=full_dataset)
         train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation, test)
         return [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
 
     def shape(self):
-        nb_users = global_parameters(self.database)[0]
-        nb_movies = global_parameters(self.database)[1]
+        nb_users = global_parameters(self.database_id)[0]
+        nb_movies = global_parameters(self.database_id)[1]
         shape = (nb_users, nb_movies)
         return shape
 

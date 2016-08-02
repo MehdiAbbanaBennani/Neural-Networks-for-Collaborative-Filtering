@@ -66,7 +66,6 @@ class Autoencoder(object):
             variable_summaries(learning_rate, 'learning_rate/')
             summary_op = tf.merge_all_summaries()
             init = tf.initialize_all_variables()
-            saver = tf.train.Saver()
             sess = tf.Session()
             summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
             sess.run(init)
