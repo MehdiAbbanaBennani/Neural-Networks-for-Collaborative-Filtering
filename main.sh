@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 autoencoder/main_experiment.py
+python3 main.py

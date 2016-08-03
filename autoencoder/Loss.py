@@ -1,6 +1,6 @@
 import tensorflow as tf
-from tools import count
-from tools import indicator
+from tools.tools import count
+from tools.tools import indicator
 
 
 class Loss(object):

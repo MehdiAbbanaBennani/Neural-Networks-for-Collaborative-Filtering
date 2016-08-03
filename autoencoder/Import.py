@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.cross_validation import train_test_split
 from scipy.sparse import csr_matrix
-from tools import global_parameters
+from tools.tools import global_parameters
 
 
 class Import(object):

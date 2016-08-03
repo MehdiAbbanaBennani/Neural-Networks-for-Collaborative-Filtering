@@ -1,9 +1,9 @@
 import tensorflow as tf
 import math
 import numpy as np
-from tools import global_parameters
-from tools import to_dense
-from tools import count
+from tools.tools import global_parameters
+from tools.tools import to_dense
+from tools.tools import count
 
 
 class Evaluation(object):

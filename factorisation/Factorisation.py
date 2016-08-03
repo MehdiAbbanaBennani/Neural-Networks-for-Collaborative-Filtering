@@ -1,4 +1,4 @@
-from tools import global_parameters
+from tools.tools import global_parameters
 import numpy as np
 import math
 from scipy.sparse import csr_matrix

@@ -2,9 +2,9 @@ import tensorflow as tf
 import math
 import numpy as np
 
-from tools import global_parameters
-from tools import to_dense
-from tools import variable_summaries
+from tools.tools import global_parameters
+from tools.tools import to_dense
+from tools.tools import variable_summaries
 
 
 class Train(object):

@@ -2,9 +2,9 @@ from autoencoder.Dataset import Dataset
 from autoencoder.Train import Train
 from autoencoder.Loss import Loss
 from autoencoder.Evaluation import Evaluation
-from tools import summary_folder
-from tools import variable_summaries
-from tools import global_parameters
+from tools.tools import summary_folder
+from tools.tools import variable_summaries
+from tools.tools import global_parameters
 
 import tensorflow as tf
 

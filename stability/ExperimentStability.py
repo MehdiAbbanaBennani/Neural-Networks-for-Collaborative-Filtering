@@ -10,13 +10,8 @@ from stability.ImportStability import ImportStability
 
 class ExperimentStability(Experiment):
 
-    def __init__(self, experiment_parameters, parameters_ranges, sets_parameters):
-        super().__init__(experiment_parameters=experiment_parameters,
-                         autoencoder_parameters_range=parameters_ranges['autoencoder'],
-                         sets_parameters=sets_parameters)
-        self.factorisation_parameters_range = parameters_ranges['factorisation']
-        self.stability_parameters_range = parameters_ranges['stability']
-        self.log_data = (np.append(np.array(list(parameters_ranges['stability'].keys())), 'rmse'))
+    def __init__(self, parameters, parameters_range):
+        super().__init__(parameters, parameters_range)
 
     def run_autoencoder_stability(self, parameters, sets):
         start_time = time.time()
@@ -24,7 +19,7 @@ class ExperimentStability(Experiment):
         Autoencoder0 = AutoencoderStability(autoencoder_parameters=parameters['autoencoder'],
                                             autoencoder_sets=sets['autoencoder'],
                                             factorisation_sets=sets['factorisation'],
-                                            sets_parameters=self.sets_parameters,
+                                            sets_parameters=self.parameters['sets'],
                                             factorisation_parameters=parameters['factorisation'],
                                             stability_parameters=parameters['stability'])
         Autoencoder0.run_training()
@@ -34,26 +29,23 @@ class ExperimentStability(Experiment):
         del Autoencoder0
         return rmse
 
-    def autoencoder_fixed_parameters_stablity(self, parameters):
+    def autoencoder_fixed_parameters_stability(self, parameters):
         rmse_mean = 0
         sets = {}
-        for i in range(self.experiment_parameters['mean_iterations']):
-            sets['factorisation'], sets['autoencoder'] = ImportStability(sets_parameters=self.sets_parameters).run()
+        for i in range(self.parameters['experiment']['mean_iterations']):
+            sets['factorisation'], sets['autoencoder'] = ImportStability(sets_parameters=self.parameters['sets']).run()
             rmse = self.run_autoencoder_stability(parameters=parameters,
                                                   sets=sets)
             rmse_mean += rmse
-        rmse_mean /= self.experiment_parameters['mean_iterations']
+        rmse_mean /= self.parameters['experiment']['mean_iterations']
         self.record_data_stability(parameters=parameters['stability'],
                                    rmse=rmse_mean)
         return rmse_mean
 
-    def best_parameters_search_stablity(self):
-        parameters = {}
-        for i in range(self.experiment_parameters['nb_draws']):
-            parameters['autoencoder'] = self.select_parameters(parameters_range=self.autoencoder_parameters_range)
-            parameters['stability'] = self.select_parameters(parameters_range=self.stability_parameters_range)
-            parameters['factorisation'] = self.select_parameters(parameters_range=self.factorisation_parameters_range)
-            rmse = self.autoencoder_fixed_parameters_stablity(parameters=parameters)
+    def best_parameters_search_stability(self):
+        for i in range(self.parameters['experiment']['nb_draws']):
+            parameters = self.select_parameters(parameters_range=self.parameters_range)
+            rmse = self.autoencoder_fixed_parameters_stability(parameters=parameters)
             if rmse < self.best_rmse:
                 best_parameters = parameters
         return best_parameters
@@ -63,7 +55,7 @@ class ExperimentStability(Experiment):
         # TODO Test experiments
 
     def autoencoder_experiment_stability(self):
-        best_parameters = self.best_parameters_search_stablity()
+        best_parameters = self.best_parameters_search_stability()
         print(best_parameters)
 
     def run(self):
