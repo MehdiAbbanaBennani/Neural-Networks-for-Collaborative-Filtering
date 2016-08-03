@@ -3,9 +3,9 @@ import numpy as np
 from scipy.sparse import csr_matrix
 import tensorflow as tf
 
-from directories_2 import summary_folder_directories
-from directories_2 import global_parameters_directories
-from directories_2 import log_folder_directories
+from config.directories import summary_folder_directories
+from config.directories import global_parameters_directories
+from config.directories import log_folder_directories
 
 
 def global_parameters(database):
