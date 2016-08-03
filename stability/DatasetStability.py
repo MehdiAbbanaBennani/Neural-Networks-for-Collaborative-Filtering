@@ -5,7 +5,6 @@ import numpy as np
 from tools import global_parameters
 
 
-# TODO square differences instead of rmse
 class DatasetStability(Dataset):
     def __init__(self, dataset, sets_parameters, stability_parameters):
 

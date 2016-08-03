@@ -11,6 +11,8 @@ class Import(object):
         self.nb_users, self.nb_movies = global_parameters(sets_parameters['database_id'])[0:2]
         self.database_id = sets_parameters['database_id']
 
+        self.train_val, self.test = self.first_split()
+
     @staticmethod
     def full_import(database_id):
         data_file = global_parameters(database_id)[3]
@@ -18,19 +20,20 @@ class Import(object):
         database[:, 0:2] -= 1
         return database
 
-    def split_dataset(self, dataset):
-        x_train1, x_test, y_train1, y_test = train_test_split(dataset[:, 0:2],
-                                                              dataset[:, 2],
-                                                              test_size=self.test_ratio,
-                                                              random_state=42)
-        x_train, x_validation, y_train, y_validation = train_test_split(x_train1,
-                                                                        y_train1,
-                                                                        test_size=self.validation_ratio,
+    def split_dataset(self, is_test):
+        if is_test:
+            validation_ratio = 0
+        else:
+            validation_ratio = self.validation_ratio
+
+        x_train, x_validation, y_train, y_validation = train_test_split(self.train_val['x'],
+                                                                        self.train_val['y'],
+                                                                        test_size=validation_ratio,
                                                                         random_state=38)
 
         return self.to_sparse1(x_train, y_train, self.shape()), \
                self.to_sparse1(x_validation, y_validation, self.shape()), \
-               self.to_sparse1(x_test, y_test, self.shape())
+               self.to_sparse1(self.test['x'], self.test['y'], self.shape())
 
     def normalize_train(self, train_matrix):
 
@@ -98,12 +101,6 @@ class Import(object):
         test_normalised_sets = self.normalize_test(test_matrix=test, mean_matrix=train_normalised_sets[1])
         return train_normalised_sets, validation_normalised_sets, test_normalised_sets
 
-    def run(self):
-        full_dataset = self.full_import(database_id=self.database_id)
-        train, validation, test = self.split_dataset(dataset=full_dataset)
-        train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation, test)
-        return [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
-
     def shape(self):
         nb_users = global_parameters(self.database_id)[0]
         nb_movies = global_parameters(self.database_id)[1]
@@ -121,3 +118,33 @@ class Import(object):
     @staticmethod
     def to_sparse3(rows, columns, values, shape):
         return csr_matrix((values, (rows, columns)), shape=shape)
+
+    @staticmethod
+    def empty_sparse(shape):
+        return csr_matrix(([], ([], [])), shape=shape)
+
+    def first_split(self):
+        full_dataset = self.full_import(database_id=self.database_id)
+        train_val, test = self.test_split(full_dataset)
+        return train_val, test
+
+    def test_split(self, dataset):
+        train_val = {}
+        test = {}
+
+        x_train1, x_test, y_train1, y_test = train_test_split(dataset[:, 0:2],
+                                                              dataset[:, 2],
+                                                              test_size=self.test_ratio,
+                                                              random_state=42)
+        train_val['x'] = x_train1
+        train_val['y'] = y_train1
+        test['x'] = x_test
+        test['y'] = y_test
+        return train_val, test
+
+    def new_sets(self, is_test):
+        train, validation, test = self.split_dataset(is_test)
+        train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
+                                                                                                 test)
+        return [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
+
