@@ -3,18 +3,22 @@ import numpy as np
 from scipy.sparse import csr_matrix
 import tensorflow as tf
 
+from directories_2 import summary_folder_directories
+from directories_2 import global_parameters_directories
+from directories_2 import log_folder_directories
+
 
 def global_parameters(database):
     if database == 0:
         nb_movies = int(1682)
         nb_users = 943
         data_set_size = 1000209
-        data_file = '/home/sequel/Pycharm project/Autoencoder/Database/ratings100K.csv'
+        data_file = global_parameters_directories['0']
     elif database == 1:
         nb_movies = int(3952)
         nb_users = 6040
         data_set_size = 1000209
-        data_file = "/home/sequel/Pycharm project/Autoencoder_Stability/Databases/ratings1M.csv"
+        data_file = global_parameters_directories['1']
     elif database == 2:
         nb_movies = int(10681)
         nb_users = 71567
@@ -26,7 +30,7 @@ def global_parameters(database):
 
 
 def summary_folder(name):
-    logdir = '/home/sequel/Pycharm project/Autoencoder_Stability/tmp/' + name
+    logdir = summary_folder_directories['0'] + name
     folder = OSFS(logdir)
     test_n = len(list(n for n in folder.listdir() if n.startswith('test')))
     return logdir + "/test" + str(test_n + 1)
@@ -46,7 +50,7 @@ def count(dense_tensor):
 
 
 def log_folder():
-    log_dir = '/home/mehdi/PycharmProjects/Autoencoder/Neural-Network-Collaborative-Filtering/Experiments/logs/'
+    log_dir = log_folder_directories['0']
     folder = OSFS(log_dir)
     test_n = len(list(n for n in folder.listdir() if n.startswith('test')))
     return log_dir + "/test" + str(test_n + 1)

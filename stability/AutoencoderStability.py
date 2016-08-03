@@ -23,7 +23,7 @@ class AutoencoderStability(Autoencoder):
                                            sets_parameters=sets_parameters,
                                            factorisation_parameters=factorisation_parameters)
         stability_parameters['rmse'] = self.Factorization.rmse
-        stability_parameters['difference_matrix'] = self.Factorization.difference_matrix
+        stability_parameters['differences'] = self.Factorization.difference_matrix
 
         self.Train_set = DatasetStability(stability_parameters=stability_parameters,
                                           dataset=autoencoder_sets[0],
@@ -47,7 +47,7 @@ class AutoencoderStability(Autoencoder):
         with tf.Graph().as_default():
             x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
             target = tf.placeholder(dtype=tf.float32, name='target')
-            coefficients = tf.placeholder(dtype=tf.float32, name='target')
+            coefficients = tf.placeholder(dtype=tf.float32, name='coefficients')
 
             learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
@@ -79,6 +79,7 @@ class AutoencoderStability(Autoencoder):
                 self.Train.learning_rate_update(epoch=epoch)
                 feed_dict = self.Train.fill_feed_dict_train_stability(target=target,
                                                                       x_sparse=x_sparse,
+                                                                      coefficients=coefficients,
                                                                       learning_rate=learning_rate)
                 sess.run(train_op,
                          feed_dict=feed_dict)

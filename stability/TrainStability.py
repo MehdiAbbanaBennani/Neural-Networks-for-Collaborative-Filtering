@@ -8,8 +8,9 @@ class TrainStability(Train):
         super().__init__(database, Train_set, batch_size, learning_rate0, learning_decay)
 
     def fill_feed_dict_train_stability(self, target, x_sparse, coefficients, learning_rate):
-        x_sparse_indices, x_sparse_values, coefficients_indices, coefficients_values = self.Train_set.next_batch_train_stability(self.batch_size,
-                                                                                                                 name='user')
+        x_sparse_indices, x_sparse_values, coefficients_indices, coefficients_values = self.Train_set.next_batch_train_stability(self.batch_size)
+        assert np.sum(x_sparse_indices - coefficients_indices) == 0
+
         shape = np.array([self.batch_size, self.nb_movies], dtype=np.int64)
         feed_dict = {
             target: to_dense(x_sparse_indices, x_sparse_values, shape),

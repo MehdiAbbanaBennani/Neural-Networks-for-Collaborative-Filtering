@@ -7,14 +7,16 @@ from tools import indicator
 
 class LossStability(Loss):
     def __init__(self):
-        pass
+        super().__init__()
 
     @staticmethod
     def loss_l2_stability(estimated, target, coefficients):
         """estimated and target are dense tensors"""
         with tf.name_scope('l2_loss'):
-            with tf.control_dependencies([tf.assert_equal(count(indicator(target) - indicator(estimated)), 0.),
-                                          tf.assert_equal(count(indicator(target) - indicator(coefficients)), 0.)]):
+            with tf.control_dependencies([tf.assert_equal(count(indicator(target) - indicator(estimated)), 0.)]):
+                # tf.assert_equal(count(indicator(target) - indicator(coefficients)), 0.)
+                print('check assertion')
+                # TODO check assertion
                 squared_difference = tf.pow(estimated - target, 2, name='squared_difference')
                 squared_difference_stable = tf.mul(squared_difference, coefficients,
                                                    name='stability_coefficients_product')

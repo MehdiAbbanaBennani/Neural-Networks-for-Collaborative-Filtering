@@ -3,9 +3,7 @@ from autoencoder.Import import Import
 
 class ImportStability(Import):
     def __init__(self, sets_parameters):
-        super().__init__(validation_ratio=sets_parameters['validation_ratio'],
-                         test_ratio=sets_parameters['test_ratio'],
-                         database=sets_parameters['database_id'])
+        super().__init__(sets_parameters=sets_parameters)
 
     @staticmethod
     def import_factorisation(train, validation):
@@ -14,7 +12,7 @@ class ImportStability(Import):
         return train_factorisation, validation_factorisation
 
     def run(self):
-        full_dataset = self.full_import(database_id=self.database)
+        full_dataset = self.full_import(database_id=self.database_id)
         train, validation, test = self.split_dataset(dataset=full_dataset)
 
         train_factorisation, validation_factorisation = self.import_factorisation(train=train, validation=validation)

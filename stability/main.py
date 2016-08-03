@@ -18,7 +18,7 @@ factorisation_parameters = {'landa': 3,
                             'iterations': 10,
                             'dimension': 10}
 
-stability_parameters = {'probability': 0.9,
+stability_parameters = {'probability': 0.5,
                         'subsets_number': 3,
                         'landa_array': [0.5, 0.3, 0.15, 0.05]}
 

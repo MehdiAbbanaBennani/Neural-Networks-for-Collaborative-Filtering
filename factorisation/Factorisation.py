@@ -63,13 +63,14 @@ class Factorisation(object):
     def differences(self, DataSet):
         row_indices = self.sparse_indices(DataSet)
         differences = []
+        U_transpose = self.U.transpose().copy()
 
         for s in range(0, np.size(DataSet.data)):
             i = int(row_indices[s])
             j = int(DataSet.indices[s])
             RT = DataSet.data[s]
-            Rij = np.dot(self.U[:, i], self.V[j, :])
-            differences = np.append(differences, [(RT - Rij)])
+            Rij = np.dot(U_transpose[i, :], self.V[j, :])
+            differences.append((RT - Rij))
         return differences
 
     def difference_matrix_build(self, Dataset):
@@ -81,12 +82,15 @@ class Factorisation(object):
     def run(self):
         print("Factorisation")
         self.initializing()
+
         print("Training ...")
         self.training()
         print("Training complete")
+
         print("Evaluating")
         rmse = self.evaluation(self.validation_set)
         print("Evaluation complete")
+
         difference_matrix = self.difference_matrix_build(self.train_set)
         return rmse, difference_matrix
     
@@ -100,3 +104,5 @@ class Factorisation(object):
             indices = np.append(indices, to_add)
             index += 1
         return indices
+
+# TODO remove np.append
