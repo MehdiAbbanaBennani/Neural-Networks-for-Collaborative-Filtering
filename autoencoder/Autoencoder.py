@@ -10,25 +10,26 @@ import tensorflow as tf
 
 
 class Autoencoder(object):
-    def __init__(self, autoencoder_parameters, autoencoder_sets, sets_parameters):
+    def __init__(self, parameters, sets):
 
-        self.database = sets_parameters['database_id']
-        self.hidden1_units = autoencoder_parameters['hidden1_units']
-        self.regularisation = autoencoder_parameters['regularisation']
-        self.learning_rate0 = autoencoder_parameters['learning_rate0']
-        self.learning_decay = autoencoder_parameters['learning_decay']
-        self.batch_size_evaluate = autoencoder_parameters['batch_size_evaluate']
-        self.batch_size_train = autoencoder_parameters['batch_size_train']
-        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
+        self.database = parameters['sets']['database_id']
+        self.hidden1_units = parameters['autoencoder']['hidden1_units']
+        self.regularisation = parameters['autoencoder']['regularisation']
+        self.learning_rate0 = parameters['autoencoder']['learning_rate0']
+        self.learning_decay = parameters['autoencoder']['learning_decay']
+        self.batch_size_evaluate = parameters['autoencoder']['batch_size_evaluate']
+        self.batch_size_train = parameters['autoencoder']['batch_size_train']
+        self.is_test = parameters['autoencoder']['is_test']
+        self.nb_users, self.nb_movies = global_parameters(database=parameters['sets']['database_id'])[0:2]
 
         self.rmse = 0
 
         self.epoch_steps = int(self.nb_users / self.batch_size_train)
-        self.nb_steps = autoencoder_parameters['nb_epoch'] * self.epoch_steps
+        self.nb_steps = parameters['autoencoder']['nb_epoch'] * self.epoch_steps
 
-        self.Train_set = Dataset(autoencoder_sets[0])
-        self.Validation_set = Dataset(autoencoder_sets[1])
-        self.Test_set = Dataset(autoencoder_sets[2])
+        self.Train_set = Dataset(sets['autoencoder'][0])
+        self.Validation_set = Dataset(sets['autoencoder'][1])
+        self.Test_set = Dataset(sets['autoencoder'][2])
 
         self.Loss = Loss()
 
@@ -49,8 +50,8 @@ class Autoencoder(object):
             learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
             prediction = self.Train.inference(x_sparse=x_sparse,
-                                         target=target,
-                                         hidden1_units=self.hidden1_units)
+                                              target=target,
+                                              hidden1_units=self.hidden1_units)
 
             loss = self.Loss.full_l2_loss(target=target,
                                           prediction=prediction,
@@ -84,31 +85,25 @@ class Autoencoder(object):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-                if step % (1 * self.epoch_steps) == 0:
-                    print('epoch ' + str(epoch))
-                    # saver.save(sess, summary_folder('checkpoints'), global_step=step)
+                # if step == (self.epoch_steps - 1):
+            print('epoch ' + str(epoch))
 
-                    # print('Training Data Eval:')
-                    # print(Evaluation.rmse(sess,
-                    #                       square_error_batch=square_error,
-                    #                       x_sparse=x_sparse,
-                    #                       target=target,
-                    #                       data_set=Train_set,
-                    #                       is_train=True))
-
-                    print('Validation Data Eval:')
-                    self.rmse = self.Evaluation.rmse(sess,
-                                          square_error_batch=square_error,
-                                          x_sparse=x_sparse,
-                                          target=target,
-                                          data_set=self.Validation_set,
-                                          is_train=False)
-                    print(self.rmse)
-
-                    # print('Test Data Eval:')
-                    # print(Evaluation.rmse(sess,
-                    #                 square_error_batch=square_error,
-                    #                 x_sparse=x_sparse,
-                    #                 target=target,
-                    #                 data_set=Test_set))
+            if not self.is_test:
+                print('Validation Data Eval:')
+                self.rmse = self.Evaluation.rmse(sess=sess,
+                                                 square_error_batch=square_error,
+                                                 x_sparse=x_sparse,
+                                                 target=target,
+                                                 data_set=self.Validation_set,
+                                                 is_train=False)
+                print(self.rmse)
+            else:
+                print('Test Data Eval:')
+                self.rmse = self.Evaluation.rmse(sess=sess,
+                                            square_error_batch=square_error,
+                                            x_sparse=x_sparse,
+                                            target=target,
+                                            data_set=self.Test_set,
+                                            is_train=False)
+                print(self.rmse)
 

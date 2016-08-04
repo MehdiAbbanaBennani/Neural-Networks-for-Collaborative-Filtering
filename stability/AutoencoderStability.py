@@ -8,28 +8,27 @@ from stability.TrainStability import TrainStability
 from stability.LossStability import LossStability
 from stability.DatasetStability import DatasetStability
 
-from tools import variable_summaries
-from tools import summary_folder
+from tools.tools import variable_summaries
+from tools.tools import summary_folder
 
 import tensorflow as tf
 
 
 class AutoencoderStability(Autoencoder):
-    def __init__(self, autoencoder_parameters, autoencoder_sets, factorisation_sets,
-                 sets_parameters, factorisation_parameters, stability_parameters):
-        super().__init__(autoencoder_parameters, autoencoder_sets, sets_parameters)
+    def __init__(self, parameters, sets):
+        super().__init__(parameters=parameters, sets=sets)
 
-        self.Factorization = Factorisation(factorisation_sets=factorisation_sets,
-                                           sets_parameters=sets_parameters,
-                                           factorisation_parameters=factorisation_parameters)
-        stability_parameters['rmse'] = self.Factorization.rmse
-        stability_parameters['differences'] = self.Factorization.difference_matrix
+        self.Factorization = Factorisation(factorisation_sets=sets['factorisation'],
+                                           sets_parameters=parameters['sets'],
+                                           factorisation_parameters=parameters['factorisation'])
+        parameters['stability']['rmse'] = self.Factorization.rmse
+        parameters['stability']['differences'] = self.Factorization.difference_matrix
 
-        self.Train_set = DatasetStability(stability_parameters=stability_parameters,
-                                          dataset=autoencoder_sets[0],
-                                          sets_parameters=sets_parameters)
-        self.Validation_set = Dataset(dataset=autoencoder_sets[1])
-        self.Test_set = Dataset(dataset=autoencoder_sets[2])
+        self.Train_set = DatasetStability(stability_parameters=parameters['factorisation'],
+                                          dataset=sets['autoencoder'][0],
+                                          sets_parameters=parameters['sets'])
+        self.Validation_set = Dataset(dataset=sets['autoencoder'][1])
+        self.Test_set = Dataset(dataset=sets['autoencoder'][2])
 
         self.Loss = LossStability()
 
@@ -89,30 +88,22 @@ class AutoencoderStability(Autoencoder):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-                if step % (1 * self.epoch_steps) == 0:
-                    print('epoch ' + str(epoch))
-                    # saver.save(sess, summary_folder('checkpoints'), global_step=step)
+                # if step == (self.epoch_steps - 1):
+                print('epoch ' + str(epoch))
 
-                    # print('Training Data Eval:')
-                    # print(Evaluation.rmse(sess,
-                    #                       square_error_batch=square_error,
-                    #                       x_sparse=x_sparse,
-                    #                       target=target,
-                    #                       data_set=Train_set,
-                    #                       is_train=True))
-
+                if not self.is_test:
                     print('Validation Data Eval:')
-                    self.rmse = self.Evaluation.rmse(sess,
-                                          square_error_batch=square_error,
-                                          x_sparse=x_sparse,
-                                          target=target,
-                                          data_set=self.Validation_set,
-                                          is_train=False)
-                    print(self.rmse)
-
-                    # print('Test Data Eval:')
-                    # print(Evaluation.rmse(sess,
-                    #                 square_error_batch=square_error,
-                    #                 x_sparse=x_sparse,
-                    #                 target=target,
-                    #                 data_set=Test_set))
+                    self.rmse = self.Evaluation.rmse(sess=sess,
+                                                     square_error_batch=square_error,
+                                                     x_sparse=x_sparse,
+                                                     target=target,
+                                                     data_set=self.Validation_set,
+                                                     is_train=False)
+                else:
+                    print('Test Data Eval:')
+                    self.rmse = self.Evaluation.rmse(sess=sess,
+                                                     square_error_batch=square_error,
+                                                     x_sparse=x_sparse,
+                                                     target=target,
+                                                     data_set=self.Test_set,
+                                                     is_train=False)

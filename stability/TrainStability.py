@@ -1,6 +1,6 @@
 from autoencoder.Train import Train
 import numpy as np
-from tools import to_dense
+from tools.tools import to_dense
 
 
 class TrainStability(Train):

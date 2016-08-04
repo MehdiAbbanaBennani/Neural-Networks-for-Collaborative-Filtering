@@ -119,10 +119,6 @@ class Import(object):
     def to_sparse3(rows, columns, values, shape):
         return csr_matrix((values, (rows, columns)), shape=shape)
 
-    @staticmethod
-    def empty_sparse(shape):
-        return csr_matrix(([], ([], [])), shape=shape)
-
     def first_split(self):
         full_dataset = self.full_import(database_id=self.database_id)
         train_val, test = self.test_split(full_dataset)
@@ -132,19 +128,17 @@ class Import(object):
         train_val = {}
         test = {}
 
-        x_train1, x_test, y_train1, y_test = train_test_split(dataset[:, 0:2],
-                                                              dataset[:, 2],
-                                                              test_size=self.test_ratio,
-                                                              random_state=42)
-        train_val['x'] = x_train1
-        train_val['y'] = y_train1
-        test['x'] = x_test
-        test['y'] = y_test
+        train_val['x'], test['x'], train_val['y'], test['y'] = train_test_split(dataset[:, 0:2],
+                                                                                dataset[:, 2],
+                                                                                test_size=self.test_ratio,
+                                                                                random_state=42)
         return train_val, test
 
     def new_sets(self, is_test):
+        sets = {}
         train, validation, test = self.split_dataset(is_test)
         train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
                                                                                                  test)
-        return [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
+        sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
+        return sets
 

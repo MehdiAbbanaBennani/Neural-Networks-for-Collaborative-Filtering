@@ -2,7 +2,7 @@ from autoencoder.Dataset import Dataset
 from scipy.sparse import csr_matrix
 
 import numpy as np
-from tools import global_parameters
+from tools.tools import global_parameters
 
 
 class DatasetStability(Dataset):

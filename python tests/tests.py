@@ -16,6 +16,13 @@ def select_parameters(parameters_range):
     return parameters
 
 
+def record_data(parameters, rmse):
+
+    for key in parameters:
+        parameters_array = np.array(list(parameters[key].values()))
+    parameters_array = np.append(parameters_array, rmse)
+    return parameters_array
+
 def pick_line(array):
     line = np.random.randint(0, np.shape(array)[0])
     return array[line, :]
@@ -50,7 +57,7 @@ parameters = {'experiments': experiment_parameters,
               'sets': sets_parameters}
 parameters_range = {'autoencoder': autoencoder_parameters_range}
 
-param = select_parameters(parameters_range=parameters_range)
+param = record_data(parameters=parameters, rmse=3)
 
 
 header = log_data_header(parameters_range)
