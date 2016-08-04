@@ -23,12 +23,12 @@ class Experiment(object):
         header = np.append(header, 'rmse')
         return header
 
+    # TODO reorder data logging
     def record_data(self, parameters, rmse):
         parameters_array = []
         for key in parameters:
             parameters_array = np.append(parameters_array, np.array(list(parameters[key].values())))
         parameters_array = np.append(parameters_array, rmse)
-        # parameters_array = parameters_array.astype('|S5')
         self.log_data = np.vstack((self.log_data, parameters_array))
 
     def log_to_file(self):
@@ -52,7 +52,7 @@ class Experiment(object):
     @staticmethod
     def pick_line(array):
         line = np.random.randint(0, np.shape(array)[0])
-        return array[line, :]
+        return array[line]
 
     def run_autoencoder(self, parameters, sets):
         start_time = time.time()

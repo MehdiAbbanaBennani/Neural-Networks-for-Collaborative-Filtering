@@ -24,7 +24,7 @@ class AutoencoderStability(Autoencoder):
         parameters['stability']['rmse'] = self.Factorization.rmse
         parameters['stability']['differences'] = self.Factorization.difference_matrix
 
-        self.Train_set = DatasetStability(stability_parameters=parameters['factorisation'],
+        self.Train_set = DatasetStability(stability_parameters=parameters['stability'],
                                           dataset=sets['autoencoder'][0],
                                           sets_parameters=parameters['sets'])
         self.Validation_set = Dataset(dataset=sets['autoencoder'][1])
@@ -88,22 +88,22 @@ class AutoencoderStability(Autoencoder):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-                # if step == (self.epoch_steps - 1):
-                print('epoch ' + str(epoch))
+            # if step == (self.epoch_steps - 1):
+            print('epoch ' + str(epoch))
 
-                if not self.is_test:
-                    print('Validation Data Eval:')
-                    self.rmse = self.Evaluation.rmse(sess=sess,
-                                                     square_error_batch=square_error,
-                                                     x_sparse=x_sparse,
-                                                     target=target,
-                                                     data_set=self.Validation_set,
-                                                     is_train=False)
-                else:
-                    print('Test Data Eval:')
-                    self.rmse = self.Evaluation.rmse(sess=sess,
-                                                     square_error_batch=square_error,
-                                                     x_sparse=x_sparse,
-                                                     target=target,
-                                                     data_set=self.Test_set,
-                                                     is_train=False)
+            if not self.is_test:
+                print('Validation Data Eval:')
+                self.rmse = self.Evaluation.rmse(sess=sess,
+                                                 square_error_batch=square_error,
+                                                 x_sparse=x_sparse,
+                                                 target=target,
+                                                 data_set=self.Validation_set,
+                                                 is_train=False)
+            else:
+                print('Test Data Eval:')
+                self.rmse = self.Evaluation.rmse(sess=sess,
+                                                 square_error_batch=square_error,
+                                                 x_sparse=x_sparse,
+                                                 target=target,
+                                                 data_set=self.Test_set,
+                                                 is_train=False)

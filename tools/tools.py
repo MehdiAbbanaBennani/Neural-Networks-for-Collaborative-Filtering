@@ -83,3 +83,11 @@ def sparse_indices(matrix):
         indices = np.append(indices, to_add)
         index += 1
     return indices
+
+
+def generate_landas(sets_number, samples_number):
+    array = np.random.rand(samples_number, sets_number)
+    array.sort(axis=1)
+    array[:] = array[:, ::-1]
+    normalised = array / array.sum(axis=1)[:, None]
+    return normalised
