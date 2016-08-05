@@ -22,7 +22,9 @@ class Autoencoder(object):
         self.is_test = parameters['autoencoder']['is_test']
         self.nb_users, self.nb_movies = global_parameters(database=parameters['sets']['database_id'])[0:2]
 
+        self.difference_matrix = 0
         self.rmse = 0
+        self.rmse_train = 0
 
         self.epoch_steps = int(self.nb_users / self.batch_size_train)
         self.nb_steps = parameters['autoencoder']['nb_epoch'] * self.epoch_steps
@@ -52,6 +54,8 @@ class Autoencoder(object):
             prediction = self.Train.inference(x_sparse=x_sparse,
                                               target=target,
                                               hidden1_units=self.hidden1_units)
+
+            difference = target - prediction
 
             loss = self.Loss.full_l2_loss(target=target,
                                           prediction=prediction,
@@ -100,10 +104,25 @@ class Autoencoder(object):
             else:
                 print('Test Data Eval:')
                 self.rmse = self.Evaluation.rmse(sess=sess,
-                                            square_error_batch=square_error,
-                                            x_sparse=x_sparse,
-                                            target=target,
-                                            data_set=self.Test_set,
-                                            is_train=False)
+                                                square_error_batch=square_error,
+                                                x_sparse=x_sparse,
+                                                target=target,
+                                                data_set=self.Test_set,
+                                                is_train=False)
                 print(self.rmse)
 
+            print('Validation Data Eval:')
+            self.rmse_train = self.Evaluation.rmse(sess=sess,
+                                             square_error_batch=square_error,
+                                             x_sparse=x_sparse,
+                                             target=target,
+                                             data_set=self.Train_set,
+                                             is_train=True)
+            print(self.rmse)
+
+            self.difference_matrix = self.Evaluation.differences(difference_op=difference,
+                                                                  data_set=self.Train_set,
+                                                                  sess=sess,
+                                                                  is_train=True,
+                                                                  x_sparse=x_sparse,
+                                                                  target=target)

@@ -91,3 +91,7 @@ def generate_landas(sets_number, samples_number):
     array[:] = array[:, ::-1]
     normalised = array / array.sum(axis=1)[:, None]
     return normalised
+
+
+def to_sparse2(indices, indptr, values, shape):
+    return csr_matrix((values, indices, indptr), shape=shape)

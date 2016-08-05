@@ -11,7 +11,7 @@ autoencoder_parameters_range = {'hidden1_units': [600],
                                 'is_test': [False]
                                 }
 
-sets_parameters = {'database_id': [1],
+sets_parameters = {'database_id': [0],
                    'test_ratio': [0.1],
                    'validation_ratio': [0.1]
                    }

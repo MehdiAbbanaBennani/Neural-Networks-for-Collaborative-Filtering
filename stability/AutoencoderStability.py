@@ -18,11 +18,16 @@ class AutoencoderStability(Autoencoder):
     def __init__(self, parameters, sets):
         super().__init__(parameters=parameters, sets=sets)
 
-        self.Factorization = Factorisation(factorisation_sets=sets['factorisation'],
-                                           sets_parameters=parameters['sets'],
-                                           factorisation_parameters=parameters['factorisation'])
-        parameters['stability']['rmse'] = self.Factorization.rmse
-        parameters['stability']['differences'] = self.Factorization.difference_matrix
+        if parameters['stability']['first_learning'] == 'factorisation':
+            self.Factorization = Factorisation(factorisation_sets=sets['factorisation'],
+                                               sets_parameters=parameters['sets'],
+                                               factorisation_parameters=parameters['factorisation'])
+            parameters['stability']['rmse'] = self.Factorization.rmse
+            parameters['stability']['differences'] = self.Factorization.difference_matrix
+        else:
+            self.Autoencoder = Autoencoder(sets=sets, parameters=parameters)
+            parameters['stability']['rmse'] = self.Autoencoder.rmse_train
+            parameters['stability']['differences'] = self.Autoencoder.difference_matrix
 
         self.Train_set = DatasetStability(stability_parameters=parameters['stability'],
                                           dataset=sets['autoencoder'][0],

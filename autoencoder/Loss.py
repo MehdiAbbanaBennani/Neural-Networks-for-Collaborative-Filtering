@@ -11,10 +11,10 @@ class Loss(object):
     def loss_l2(estimated, target):
         """estimated and target are dense tensors"""
         with tf.name_scope('l2_loss'):
-            with tf.control_dependencies([tf.assert_equal(count(indicator(target) - indicator(estimated)), 0.)]):
-                squared_difference = tf.pow(estimated - target, 2, name='squared_difference')
-                loss = tf.reduce_sum(squared_difference, name='summing_square_errors')
-                return loss
+            # with tf.control_dependencies([tf.assert_equal(count(indicator(target) - indicator(estimated)), 0.)]):
+            squared_difference = tf.pow(estimated - target, 2, name='squared_difference')
+            loss = tf.reduce_sum(squared_difference, name='summing_square_errors')
+            return loss
 
     @staticmethod # Unchecked
     def l2_regularisation(regularisation, weights_list):

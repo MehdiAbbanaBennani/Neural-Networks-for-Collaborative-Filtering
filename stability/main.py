@@ -1,5 +1,6 @@
 from stability.ExperimentStability import ExperimentStability
 from stability.AutoencoderStability import AutoencoderStability
+from autoencoder.Autoencoder import Autoencoder
 
 from tools.tools import generate_landas
 
@@ -29,7 +30,8 @@ factorisation_parameters = {'landa': [3],
 stability_parameters = {'probability': [0.5, 0.6, 0.7, 0.8, 0.9],
                         'subsets_number': [3],
                         'landa_array': generate_landas(sets_number=4,
-                                                       samples_number=20)
+                                                       samples_number=20),
+                        'first_learning': 'factorisation'
                         }
 
 parameters_range = {'autoencoder': autoencoder_parameters,
@@ -40,7 +42,8 @@ parameters_range = {'autoencoder': autoencoder_parameters,
                     }
 
 Experiment = ExperimentStability(parameters_range=parameters_range,
-                                 Autoencoder=AutoencoderStability)
+                                 Autoencoder=Autoencoder,
+                                 AutoencoderStability=AutoencoderStability)
 Experiment.run()
 
 

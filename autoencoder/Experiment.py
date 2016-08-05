@@ -18,16 +18,18 @@ class Experiment(object):
 
     def log_data_header(self):
         header = []
-        for key in self.parameters_range:
-            header = np.append(header, np.array(list(self.parameters_range[key].keys())))
+        for key, value in sorted(self.parameters_range.items()):
+            for key2, value2 in sorted(value.items()):
+                header = np.append(header, key2)
         header = np.append(header, 'rmse')
         return header
 
     # TODO reorder data logging
     def record_data(self, parameters, rmse):
         parameters_array = []
-        for key in parameters:
-            parameters_array = np.append(parameters_array, np.array(list(parameters[key].values())))
+        for key, value in sorted(parameters.items()):
+            for key2, value2 in sorted(value.items()):
+                parameters_array = np.append(parameters_array, value2)
         parameters_array = np.append(parameters_array, rmse)
         self.log_data = np.vstack((self.log_data, parameters_array))
 
@@ -45,6 +47,8 @@ class Experiment(object):
                 range = parameters_range[key][key_2]
                 if len(np.shape(range)) == 1:
                     parameters[key][key_2] = np.random.choice(parameters_range[key][key_2])
+                elif len(np.shape(range)) == 0:
+                    parameters[key][key_2] = range
                 else:
                     parameters[key][key_2] = self.pick_line(range)
         return parameters
@@ -54,10 +58,10 @@ class Experiment(object):
         line = np.random.randint(0, np.shape(array)[0])
         return array[line]
 
-    def run_autoencoder(self, parameters, sets):
+    def run_autoencoder(self, parameters, sets, Autoencoder):
         start_time = time.time()
         tf.reset_default_graph()
-        Autoencoder1 = self.Autoencoder(parameters=parameters, sets=sets)
+        Autoencoder1 = Autoencoder(parameters=parameters, sets=sets)
         Autoencoder1.run_training()
         rmse = Autoencoder1.rmse
         print(rmse)
@@ -70,7 +74,8 @@ class Experiment(object):
         for i in range(self.parameters_range['experiments']['mean_iterations'][0]):
             sets = self.Import.new_sets(is_test=False)
             rmse = self.run_autoencoder(parameters=parameters,
-                                        sets=sets)
+                                        sets=sets,
+                                        Autoencoder=self.Autoencoder)
             rmse_mean += rmse
         rmse_mean /= self.parameters_range['experiments']['mean_iterations'][0]
         self.record_data(parameters=parameters, rmse=rmse_mean)
@@ -88,13 +93,14 @@ class Experiment(object):
     def test_set_evaluation(self, parameters):
         parameters['autoencoder']['is_test'] = True
         sets = self.Import.new_sets(is_test=True)
-        rmse = self.run_autoencoder(parameters=parameters, sets=sets)
+        rmse = self.run_autoencoder(parameters=parameters, sets=sets, Autoencoder=self.Autoencoder)
         self.record_data(parameters=parameters, rmse=rmse)
         return rmse
         # TODO Test experiments
 
     def autoencoder_experiment(self):
         best_parameters = self.best_parameters_search()
+        print('\n Best parameters')
         print(best_parameters)
         rmse_test = self.test_set_evaluation(best_parameters)
         print('rmse_test' + str(rmse_test))
