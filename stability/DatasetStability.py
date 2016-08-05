@@ -18,7 +18,8 @@ class DatasetStability(Dataset):
         self.subsets_number = stability_parameters['subsets_number']
         self.landa_array = stability_parameters['landa_array']
 
-        assert np.sum(self.landa_array) == 1
+        # assert np.sum(self.landa_array) == 1
+        print(self.landa_array)
         assert np.size(self.landa_array) == self.subsets_number + 1
 
         self.coefficients = self.run()
