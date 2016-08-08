@@ -16,7 +16,7 @@ class Import(object):
     @staticmethod
     def full_import(database_id):
         data_file = global_parameters(database_id)[3]
-        database = np.genfromtxt(data_file, delimiter=',')[:, 0:3]
+        database = np.genfromtxt(data_file, delimiter=';')[:, 0:3]
         database[:, 0:2] -= 1
         return database
 

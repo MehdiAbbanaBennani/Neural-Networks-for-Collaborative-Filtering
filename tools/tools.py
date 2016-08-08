@@ -20,10 +20,10 @@ def global_parameters(database):
         data_set_size = 1000209
         data_file = global_parameters_directories['1']
     elif database == 2:
-        nb_movies = int(10681)
+        nb_movies = 65133
         nb_users = 71567
         data_set_size = 10000054
-        data_file = "Databases/ratings10M.csv"
+        data_file = global_parameters_directories['2']
     else:
         print('No such dataset')
     return nb_users, nb_movies, data_set_size, data_file
