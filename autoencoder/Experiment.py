@@ -8,29 +8,34 @@ from tools.tools import log_folder
 
 class Experiment(object):
     def __init__(self, parameters_range, Autoencoder):
-        self.parameters_range = parameters_range
 
-        self.best_rmse = 3
-        self.best_parameters = {}
-        self.log_data = self.log_data_header()
+        self.parameters_range = parameters_range
+        self.parameters_range['rmse'] = {'autoencoder': 3}
+
+        self.best_parameters = {'autoencoder': self.select_parameters(self.parameters_range).copy()}
+
         self.Autoencoder = Autoencoder
         self.Import = Import(sets_parameters=self.to_scalar(parameters_range['sets']))
+
+        self.log_data = self.log_data_header()
 
     def log_data_header(self):
         header = []
         for key, value in sorted(self.parameters_range.items()):
             for key2, value2 in sorted(value.items()):
-                header = np.append(header, key2)
-        header = np.append(header, 'rmse')
+                if not key2 == 'landa_array':
+                    header = np.append(header, key2)
+                else:
+                    for i in range(np.size(value2[0])):
+                        header = np.append(header, key2)
         return header
 
     # TODO reorder data logging
-    def record_data(self, parameters, rmse):
+    def record_data(self, parameters):
         parameters_array = []
         for key, value in sorted(parameters.items()):
             for key2, value2 in sorted(value.items()):
                 parameters_array = np.append(parameters_array, value2)
-        parameters_array = np.append(parameters_array, rmse)
         self.log_data = np.vstack((self.log_data, parameters_array))
 
     def log_to_file(self):
@@ -41,16 +46,15 @@ class Experiment(object):
 
     def select_parameters(self, parameters_range):
         parameters = {}
-        for key in parameters_range:
+        for key, value in sorted(parameters_range.items()):
             parameters[key] = {}
-            for key_2 in parameters_range[key]:
-                range = parameters_range[key][key_2]
+            for key2, range in sorted(value.items()):
                 if len(np.shape(range)) == 1:
-                    parameters[key][key_2] = np.random.choice(parameters_range[key][key_2])
+                    parameters[key][key2] = np.random.choice(parameters_range[key][key2])
                 elif len(np.shape(range)) == 0:
-                    parameters[key][key_2] = range
+                    parameters[key][key2] = range
                 else:
-                    parameters[key][key_2] = self.pick_line(range)
+                    parameters[key][key2] = self.pick_line(range)
         return parameters
 
     @staticmethod
@@ -58,7 +62,8 @@ class Experiment(object):
         line = np.random.randint(0, np.shape(array)[0])
         return array[line]
 
-    def run_autoencoder(self, parameters, sets, Autoencoder):
+    @staticmethod
+    def run_autoencoder(parameters, sets, Autoencoder):
         start_time = time.time()
         tf.reset_default_graph()
         Autoencoder1 = Autoencoder(parameters=parameters, sets=sets)
@@ -78,7 +83,8 @@ class Experiment(object):
                                         Autoencoder=self.Autoencoder)
             rmse_mean += rmse
         rmse_mean /= self.parameters_range['experiments']['mean_iterations'][0]
-        self.record_data(parameters=parameters, rmse=rmse_mean)
+        parameters['rmse']['autoencoder'] = rmse_mean
+        self.record_data(parameters=parameters)
         return rmse_mean
 
     def best_parameters_search(self):
@@ -86,17 +92,18 @@ class Experiment(object):
             parameters = self.select_parameters(parameters_range=self.parameters_range)
             parameters['autoencoder']['is_test'] = False
             rmse = self.autoencoder_fixed_parameters(parameters=parameters)
-            if rmse < self.best_rmse:
-                best_parameters = parameters
-        return best_parameters
+            if rmse < self.best_parameters['autoencoder']['rmse']['autoencoder']:
+                parameters['rmse']['autoencoder'] = rmse
+                self.best_parameters['autoencoder'] = parameters
+        return self.best_parameters
 
     def test_set_evaluation(self, parameters):
-        parameters['autoencoder']['is_test'] = True
+        parameters_test = parameters['autoencoder']
+        parameters_test['autoencoder']['is_test'] = True
         sets = self.Import.new_sets(is_test=True)
-        rmse = self.run_autoencoder(parameters=parameters, sets=sets, Autoencoder=self.Autoencoder)
-        self.record_data(parameters=parameters, rmse=rmse)
+        rmse = self.run_autoencoder(parameters=parameters_test, sets=sets, Autoencoder=self.Autoencoder)
+        self.record_data(parameters=parameters_test)
         return rmse
-        # TODO Test experiments
 
     def autoencoder_experiment(self):
         best_parameters = self.best_parameters_search()

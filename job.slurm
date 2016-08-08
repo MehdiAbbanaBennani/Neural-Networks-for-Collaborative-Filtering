@@ -1,9 +1,11 @@
 #!/bin/bash
 
-#SBATCH -N 1 -n 1
-#SBATCH --time=14:00:00
-#SBATCH --job-name=one_node_one_cpu
+#SBATCH -N 1 -n 2
+#SBATCH --gres=gpu:K80
 #SBATCH --mem=4096
+#SBATCH --job-name=autoencoder_stability_search_fixed_first_learning
+#SBATCH --time=48:00:00
+
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mehdi.abbana-bennani@inria.fr
 

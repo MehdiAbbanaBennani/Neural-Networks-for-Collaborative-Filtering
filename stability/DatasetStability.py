@@ -15,6 +15,8 @@ class DatasetStability(Dataset):
         self.differences = stability_parameters['differences']
         self.probability = stability_parameters['probability']
         self.rmse = stability_parameters['rmse']
+        print('check self.rmse different from zero:')
+        print(self.rmse)
         self.subsets_number = stability_parameters['subsets_number']
         self.landa_array = stability_parameters['landa_array']
 

@@ -18,7 +18,7 @@ autoencoder_parameters = {'hidden1_units': [500, 550, 600, 650, 700],
                           'learning_decay': [0.001, 0.005, 0.1, 0.5, 0.9],
                           'batch_size_evaluate': [100],
                           'batch_size_train': [35],
-                          'nb_epoch': [15],
+                          'nb_epoch': [1],
                           'is_test': [False]
                           }
 

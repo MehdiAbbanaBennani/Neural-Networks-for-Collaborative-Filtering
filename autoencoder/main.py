@@ -8,7 +8,7 @@ autoencoder_parameters_range = {'hidden1_units': [600],
                                 'batch_size_evaluate': [100],
                                 'batch_size_train': [35],
                                 'nb_epoch': [1],
-                                'is_test': [False]
+                                'is_test': [0]
                                 }
 
 sets_parameters = {'database_id': [0],

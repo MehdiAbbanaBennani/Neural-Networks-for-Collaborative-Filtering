@@ -26,8 +26,10 @@ class AutoencoderStability(Autoencoder):
             parameters['stability']['differences'] = self.Factorization.difference_matrix
         else:
             self.Autoencoder = Autoencoder(sets=sets, parameters=parameters)
+            self.Autoencoder.run_training()
             parameters['stability']['rmse'] = self.Autoencoder.rmse_train
-            parameters['stability']['differences'] = self.Autoencoder.difference_matrix
+            parameters['stability']['differences'] = self.Autoencoder.difference_matrix.copy()
+            del self.Autoencoder
 
         self.Train_set = DatasetStability(stability_parameters=parameters['stability'],
                                           dataset=sets['autoencoder'][0],
@@ -48,6 +50,7 @@ class AutoencoderStability(Autoencoder):
                                      Train_set=self.Train_set)
 
     def run_training(self):
+        tf.reset_default_graph()
         with tf.Graph().as_default():
             x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
             target = tf.placeholder(dtype=tf.float32, name='target')
@@ -74,7 +77,7 @@ class AutoencoderStability(Autoencoder):
             variable_summaries(learning_rate, 'learning_rate/')
             summary_op = tf.merge_all_summaries()
             init = tf.initialize_all_variables()
-            sess = tf.Session()
+            sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
             summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
             sess.run(init)
 
@@ -93,7 +96,6 @@ class AutoencoderStability(Autoencoder):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-            # if step == (self.epoch_steps - 1):
             print('epoch ' + str(epoch))
 
             if not self.is_test:
