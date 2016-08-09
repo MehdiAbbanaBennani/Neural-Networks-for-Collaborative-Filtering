@@ -61,6 +61,15 @@ class Evaluation(object):
             target_values = x_sparse_values
         else:
             target_indices, target_values = data_set.next_batch(batch_size, 'rmse')
+
+        while np.size(x_sparse_indices) == 0:
+            x_sparse_indices, x_sparse_values = self.Train_set.next_batch(batch_size, 'rmse')
+            if is_train:
+                target_indices = x_sparse_indices
+                target_values = x_sparse_values
+            else:
+                target_indices, target_values = data_set.next_batch(batch_size, 'rmse')
+
         shape = np.array([batch_size, self.nb_movies], dtype=np.int64)
         feed_dict = {
             target: to_dense(target_indices, target_values, shape),

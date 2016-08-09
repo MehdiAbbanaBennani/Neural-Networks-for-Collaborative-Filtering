@@ -77,7 +77,7 @@ class AutoencoderStability(Autoencoder):
             variable_summaries(learning_rate, 'learning_rate/')
             summary_op = tf.merge_all_summaries()
             init = tf.initialize_all_variables()
-            sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+            sess = tf.Session()
             summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
             sess.run(init)
 

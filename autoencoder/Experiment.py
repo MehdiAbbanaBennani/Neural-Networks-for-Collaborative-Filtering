@@ -91,6 +91,7 @@ class Experiment(object):
         for i in range(self.parameters_range['experiments']['nb_draws'][0]):
             parameters = self.select_parameters(parameters_range=self.parameters_range)
             parameters['autoencoder']['is_test'] = False
+            print(parameters)
             rmse = self.autoencoder_fixed_parameters(parameters=parameters)
             if rmse < self.best_parameters['autoencoder']['rmse']['autoencoder']:
                 parameters['rmse']['autoencoder'] = rmse
