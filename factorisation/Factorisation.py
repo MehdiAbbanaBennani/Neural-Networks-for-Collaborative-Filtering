@@ -88,7 +88,7 @@ class Factorisation(object):
         print("Training complete")
 
         print("Evaluating")
-        rmse = self.evaluation(self.validation_set)
+        rmse = self.evaluation(self.train_set)
         print("Evaluation complete")
 
         difference_matrix = self.difference_matrix_build(self.train_set)

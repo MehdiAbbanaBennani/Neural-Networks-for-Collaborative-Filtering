@@ -18,11 +18,18 @@ class AutoencoderStability(Autoencoder):
     def __init__(self, parameters, sets):
         super().__init__(parameters=parameters, sets=sets)
 
-        self.Factorization = Factorisation(factorisation_sets=sets['factorisation'],
-                                           sets_parameters=parameters['sets'],
-                                           factorisation_parameters=parameters['factorisation'])
-        parameters['stability']['rmse'] = self.Factorization.rmse
-        parameters['stability']['differences'] = self.Factorization.difference_matrix
+        if parameters['stability']['first_learning'] == 'factorisation':
+            self.Factorization = Factorisation(factorisation_sets=sets['factorisation'],
+                                               sets_parameters=parameters['sets'],
+                                               factorisation_parameters=parameters['factorisation'])
+            parameters['stability']['rmse'] = self.Factorization.rmse
+            parameters['stability']['differences'] = self.Factorization.difference_matrix.copy()
+        else:
+            self.Autoencoder = Autoencoder(sets=sets, parameters=parameters)
+            self.Autoencoder.run_training()
+            parameters['stability']['rmse'] = self.Autoencoder.rmse_train
+            parameters['stability']['differences'] = self.Autoencoder.difference_matrix.copy()
+            del self.Autoencoder
 
         self.Train_set = DatasetStability(stability_parameters=parameters['stability'],
                                           dataset=sets['autoencoder'][0],
@@ -43,6 +50,7 @@ class AutoencoderStability(Autoencoder):
                                      Train_set=self.Train_set)
 
     def run_training(self):
+        tf.reset_default_graph()
         with tf.Graph().as_default():
             x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
             target = tf.placeholder(dtype=tf.float32, name='target')
@@ -88,7 +96,6 @@ class AutoencoderStability(Autoencoder):
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
-            # if step == (self.epoch_steps - 1):
             print('epoch ' + str(epoch))
 
             if not self.is_test:

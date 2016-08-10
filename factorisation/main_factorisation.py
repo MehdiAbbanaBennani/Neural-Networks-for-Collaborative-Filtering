@@ -11,9 +11,9 @@ sets_parameters = {'database_id': 1,
                    'validation_ratio': 0.1}
 
 Import = ImportStability(sets_parameters=sets_parameters)
-factorisation_sets, autoencoder_sets = Import.run()
+sets = Import.new_sets(is_test=0)
 
-Factorization = Factorisation(factorisation_sets=factorisation_sets,
+Factorization = Factorisation(factorisation_sets=sets['factorisation'],
                               factorisation_parameters=factorisation_parameters,
                               sets_parameters=sets_parameters)
 

@@ -15,10 +15,13 @@ class DatasetStability(Dataset):
         self.differences = stability_parameters['differences']
         self.probability = stability_parameters['probability']
         self.rmse = stability_parameters['rmse']
+        print('check self.rmse different from zero:')
+        print(self.rmse)
         self.subsets_number = stability_parameters['subsets_number']
         self.landa_array = stability_parameters['landa_array']
 
-        assert np.sum(self.landa_array) == 1
+        # assert np.sum(self.landa_array) == 1
+        print(self.landa_array)
         assert np.size(self.landa_array) == self.subsets_number + 1
 
         self.coefficients = self.run()
@@ -34,6 +37,7 @@ class DatasetStability(Dataset):
     def omega_p_build(self):
         probabilities = np.random.rand(self.nb_elements)
         differences = np.absolute(self.differences.data)
+        # TODO Check array size to optimize parameters
         print('check array size to optimize parameters')
         set1 = np.intersect1d(np.where(differences <= self.rmse),
                               np.where(probabilities <= self.probability))

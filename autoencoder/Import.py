@@ -46,14 +46,15 @@ class Import(object):
         for line_number in range(train_matrix.shape[0]):
             # Normalise the line
             line = train_matrix.getrow(line_number)
-            line_mean = np.mean(line.data)
-            line.data -= line_mean
-            assert line.mean() < 1e-10
+            if np.size(line) > 0:
+                line_mean = np.mean(line.data)
+                line.data -= line_mean
+                assert line.mean() < 1e-10
 
-            # Append to the arrays
-            mean_array = np.ones(np.size(line.data)) * line_mean
-            output_values_mean = np.append(output_values_mean, mean_array)
-            output_values_ratings = np.append(output_values_ratings, line.data)
+                # Append to the arrays
+                mean_array = np.ones(np.size(line.data)) * line_mean
+                output_values_mean = np.append(output_values_mean, mean_array)
+                output_values_ratings = np.append(output_values_ratings, line.data)
 
         ratings_sparse = self.to_sparse2(indices=train_matrix.indices,
                                          indptr=train_matrix.indptr,
@@ -76,14 +77,15 @@ class Import(object):
         for line_number in range(test_matrix.shape[0]):
             # Normalise the line
             line = test_matrix.getrow(line_number)
-            line_train_mean = mean_matrix.getrow(line_number).data[0]
-            line.data -= line_train_mean
-            assert line.mean() < 1e-2
+            if np.size(line) > 0:
+                line_train_mean = mean_matrix.getrow(line_number).data[0]
+                line.data -= line_train_mean
+                assert line.mean() < 1e-2
 
-            # Append to the arrays
-            mean_array = np.ones(np.size(line.data)) * line_train_mean
-            output_values_mean = np.append(output_values_mean, mean_array)
-            output_values_ratings = np.append(output_values_ratings, line.data)
+                # Append to the arrays
+                mean_array = np.ones(np.size(line.data)) * line_train_mean
+                output_values_mean = np.append(output_values_mean, mean_array)
+                output_values_ratings = np.append(output_values_ratings, line.data)
 
         ratings_sparse = self.to_sparse2(indices=test_matrix.indices,
                                          indptr=test_matrix.indptr,
