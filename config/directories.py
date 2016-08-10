@@ -3,7 +3,7 @@ from os.path import join
 
 root = dirname(dirname(__file__))
 
-global_parameters_directories = {'0': join(root, 'Databases/ratings100K.csv'),
+global_parameters_directories = {'0': join(root, 'Databases/ratings100k.csv'),
                                  '1': join(root, 'Databases/ratings1M.csv'),
                                  '2': join(root, 'Databases/ratings10M.csv')}
 

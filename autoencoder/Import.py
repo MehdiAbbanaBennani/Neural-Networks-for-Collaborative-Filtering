@@ -53,8 +53,11 @@ class Import(object):
 
                 # Append to the arrays
                 mean_array = np.ones(np.size(line.data)) * line_mean
-                output_values_mean = np.append(output_values_mean, mean_array)
-                output_values_ratings = np.append(output_values_ratings, line.data)
+                output_values_mean.extend(mean_array)
+                output_values_ratings.extend(line.data)
+
+        output_values_ratings = np.asarray(output_values_ratings)
+        output_values_mean = np.asarray(output_values_mean)
 
         ratings_sparse = self.to_sparse2(indices=train_matrix.indices,
                                          indptr=train_matrix.indptr,
@@ -84,8 +87,11 @@ class Import(object):
 
                 # Append to the arrays
                 mean_array = np.ones(np.size(line.data)) * line_train_mean
-                output_values_mean = np.append(output_values_mean, mean_array)
-                output_values_ratings = np.append(output_values_ratings, line.data)
+                output_values_mean.extend(mean_array)
+                output_values_ratings.extend(line.data)
+
+        output_values_mean = np.asarray(output_values_mean)
+        output_values_ratings = np.asarray(output_values_ratings)
 
         ratings_sparse = self.to_sparse2(indices=test_matrix.indices,
                                          indptr=test_matrix.indptr,

@@ -3,7 +3,7 @@
 #SBATCH -N 1 -n 2
 #SBATCH --gres=gpu:tesla
 #SBATCH --mem=4096
-#SBATCH --job-name=stability_3_draws
+#SBATCH --job-name=10M_1_draw_after_optim_1
 #SBATCH --time=48:00:00
 
 #SBATCH --mail-type=ALL

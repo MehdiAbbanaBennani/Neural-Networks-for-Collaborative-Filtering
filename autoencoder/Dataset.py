@@ -32,10 +32,14 @@ class Dataset(object): # Checked
             line_values = self.category_matrix[name].getrow(new_line_number).data
             line_indices_cols = self.category_matrix[name].getrow(new_line_number).indices
             line_indices_lines = np.ones(np.size(line_indices_cols), dtype=int) * index
-            indices_1 = np.append(indices_1, line_indices_lines)
-            indices_2 = np.append(indices_2, line_indices_cols)
-            ratings = np.append(ratings, line_values)
+            indices_1.extend(line_indices_lines)
+            indices_2.extend(line_indices_cols)
+            ratings.extend(line_values)
             index += 1
+
+        indices_1 = np.asarray(indices_1)
+        indices_2 = np.asarray(indices_2)
+        ratings = np.asarray(ratings)
 
         ratings = ratings.astype(np.float32)
         indices = np.asarray(list(zip(indices_1.astype(int), indices_2.astype(int))))
@@ -70,6 +74,7 @@ class Dataset(object): # Checked
         for k in range(matrix.shape[0]):
             length = matrix.indptr[index + 1] - matrix.indptr[index]
             to_add = np.ones(length) * index
-            indices = np.append(indices, to_add)
+            indices.extend(to_add)
             index += 1
+        indices = np.asarray(indices)
         return indices

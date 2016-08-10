@@ -1,0 +1,4735 @@
+{
+    "traceEvents": [
+        {
+            "args": {
+                "name": "Allocators"
+            },
+            "name": "process_name",
+            "pid": 0,
+            "ph": "M"
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "name": "process_name",
+            "pid": 1,
+            "ph": "M"
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "name": "process_name",
+            "pid": 2,
+            "ph": "M"
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "pid": 1,
+            "dur": 32,
+            "ts": 1470839567437558,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 14,
+            "ts": 1470839567437618,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "loss/l2_loss/squared_difference/y",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567437635,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "loss/l2_loss/range/start",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567437643,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "loss/l2_loss/range/delta",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567437650,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567437661,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/begin",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567437668,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/size",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567437675,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Variable",
+            "args": {
+                "name": "hidden1/weights",
+                "op": "Variable"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567437675,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice_1/begin",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567437682,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "name": "hidden1/weights/read",
+                "op": "Identity",
+                "input0": "hidden1/weights"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567437683,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/l2_loss/sub_grad/Shape_1",
+                "op": "Shape",
+                "input0": "_recv_target_0"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567437699,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape/_5__cf__15",
+                "op": "Const"
+            },
+            "pid": 1,
+            "dur": 24,
+            "ts": 1470839567437691,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "name": "Slice",
+            "args": {
+                "input2": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice_1/size",
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice_1/begin",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice_1",
+                "op": "Slice",
+                "input0": "_recv_x_sparse/indices_0"
+            },
+            "pid": 1,
+            "dur": 82,
+            "ts": 1470839567437720,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Squeeze",
+            "args": {
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze_1",
+                "op": "Squeeze",
+                "input0": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice_1"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567437809,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Cast",
+            "args": {
+                "name": "masking/to_bool",
+                "op": "Cast",
+                "input0": "_recv_target_0"
+            },
+            "pid": 1,
+            "dur": 1057,
+            "ts": 1470839567437712,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Cast",
+            "args": {
+                "name": "masking/to_float",
+                "op": "Cast",
+                "input0": "masking/to_bool"
+            },
+            "pid": 1,
+            "dur": 550,
+            "ts": 1470839567438797,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 0,
+            "name": "masking/to_bool",
+            "pid": 1,
+            "ts": 1470839567438769,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 0,
+            "name": "masking/to_bool",
+            "pid": 1,
+            "ts": 1470839567438797,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/masking/masking_grad/Shape_1",
+                "op": "Shape",
+                "input0": "masking/to_float"
+            },
+            "pid": 1,
+            "dur": 20,
+            "ts": 1470839567439376,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Variable",
+            "args": {
+                "name": "hidden1/biases",
+                "op": "Variable"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567439407,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "name": "hidden1/biases/read",
+                "op": "Identity",
+                "input0": "hidden1/biases"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567439416,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/hidden1/preactivation_grad/Shape_1",
+                "op": "Shape",
+                "input0": "hidden1/biases/read"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567439430,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "L2Loss",
+            "args": {
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss",
+                "op": "L2Loss",
+                "input0": "hidden1/biases/read"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567439441,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Shape_1",
+                "op": "Shape",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567439456,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567439464,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss",
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1",
+                "op": "Mul",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/scale"
+            },
+            "pid": 1,
+            "dur": 12,
+            "ts": 1470839567439476,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Variable",
+            "args": {
+                "name": "hidden2/weights",
+                "op": "Variable"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567439493,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "name": "hidden2/weights/read",
+                "op": "Identity",
+                "input0": "hidden2/weights"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567439501,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "L2Loss",
+            "args": {
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss",
+                "op": "L2Loss",
+                "input0": "hidden2/weights/read"
+            },
+            "pid": 1,
+            "dur": 2020,
+            "ts": 1470839567439510,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Shape_1",
+                "op": "Shape",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss"
+            },
+            "pid": 1,
+            "dur": 13,
+            "ts": 1470839567441549,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567441565,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss",
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_2",
+                "op": "Mul",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_2/scale"
+            },
+            "pid": 1,
+            "dur": 15,
+            "ts": 1470839567441579,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Variable",
+            "args": {
+                "name": "hidden2/biases",
+                "op": "Variable"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567441599,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "name": "hidden2/biases/read",
+                "op": "Identity",
+                "input0": "hidden2/biases"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567441608,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/hidden2/preactivation_grad/Shape_1",
+                "op": "Shape",
+                "input0": "hidden2/biases/read"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567441621,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "L2Loss",
+            "args": {
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss",
+                "op": "L2Loss",
+                "input0": "hidden2/biases/read"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567441630,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Shape_1",
+                "op": "Shape",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567441644,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567441651,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss",
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_3",
+                "op": "Mul",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer_3/scale"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567441659,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Variable",
+            "args": {
+                "name": "global_step",
+                "op": "Variable"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567441670,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Gather",
+            "args": {
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze_1",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather_1",
+                "op": "Gather",
+                "input0": "hidden1/weights/read"
+            },
+            "pid": 1,
+            "dur": 3837,
+            "ts": 1470839567437824,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 1,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437691,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 1,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437824,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 2,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze_1",
+            "pid": 1,
+            "ts": 1470839567437820,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 2,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze_1",
+            "pid": 1,
+            "ts": 1470839567437824,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input3": "hidden1/weights/read",
+                "name": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul",
+                "input1": "_recv_x_sparse/values_0",
+                "input2": "_recv_x_sparse/shape_0",
+                "input0": "_recv_x_sparse/indices_0"
+            },
+            "pid": 1,
+            "dur": 4191,
+            "ts": 1470839567437718,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 3
+        },
+        {
+            "id": 3,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437691,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 3,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437718,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/hidden1/preactivation_grad/Shape",
+                "op": "Shape",
+                "input0": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567441925,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 4,
+            "name": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567441909,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 4,
+            "name": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567441925,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/Shape_1",
+                "name": "gradients/hidden1/preactivation_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/hidden1/preactivation_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567441940,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Add",
+            "args": {
+                "input1": "hidden1/biases/read",
+                "name": "hidden1/preactivation",
+                "op": "Add",
+                "input0": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "dur": 114,
+            "ts": 1470839567441955,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 5,
+            "name": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567441909,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 5,
+            "name": "hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567441955,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Slice",
+            "args": {
+                "input2": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/size",
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/begin",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice",
+                "op": "Slice",
+                "input0": "_recv_x_sparse/indices_0"
+            },
+            "pid": 1,
+            "dur": 410,
+            "ts": 1470839567441678,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 6,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/begin",
+            "pid": 1,
+            "ts": 1470839567437673,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 6,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/begin",
+            "pid": 1,
+            "ts": 1470839567441678,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 7,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/size",
+            "pid": 1,
+            "ts": 1470839567437679,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 7,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice/size",
+            "pid": 1,
+            "ts": 1470839567441678,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Squeeze",
+            "args": {
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze",
+                "op": "Squeeze",
+                "input0": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567442095,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 8,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice",
+            "pid": 1,
+            "ts": 1470839567442088,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 8,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Slice",
+            "pid": 1,
+            "ts": 1470839567442095,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "L2Loss",
+            "args": {
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+                "op": "L2Loss",
+                "input0": "hidden1/weights/read"
+            },
+            "pid": 1,
+            "dur": 4440,
+            "ts": 1470839567437695,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 4
+        },
+        {
+            "id": 9,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437691,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 9,
+            "name": "hidden1/weights/read",
+            "pid": 1,
+            "ts": 1470839567437695,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape_1",
+                "op": "Shape",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567442143,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 10,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567442135,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 10,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567442143,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+                "name": "loss/regularisation/get_regularization_penalty/l2_regularizer",
+                "op": "Mul",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567442144,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 11,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale",
+            "pid": 1,
+            "ts": 1470839567437632,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 11,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale",
+            "pid": 1,
+            "ts": 1470839567442144,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 12,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567442135,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 12,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567442144,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567442153,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "AddN",
+            "args": {
+                "input3": "loss/regularisation/get_regularization_penalty/l2_regularizer_3",
+                "name": "loss/regularisation/get_regularization_penalty",
+                "op": "AddN",
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_1",
+                "input2": "loss/regularisation/get_regularization_penalty/l2_regularizer_2",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567442156,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 13,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1",
+            "pid": 1,
+            "ts": 1470839567439488,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 13,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1",
+            "pid": 1,
+            "ts": 1470839567442156,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 14,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_2",
+            "pid": 1,
+            "ts": 1470839567441594,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 14,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_2",
+            "pid": 1,
+            "ts": 1470839567442156,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 15,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_3",
+            "pid": 1,
+            "ts": 1470839567441665,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 15,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_3",
+            "pid": 1,
+            "ts": 1470839567442156,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Tanh",
+            "args": {
+                "name": "hidden1/activation",
+                "op": "Tanh",
+                "input0": "hidden1/preactivation"
+            },
+            "pid": 1,
+            "dur": 94,
+            "ts": 1470839567442076,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 16,
+            "name": "hidden1/preactivation",
+            "pid": 1,
+            "ts": 1470839567442069,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 16,
+            "name": "hidden1/preactivation",
+            "pid": 1,
+            "ts": 1470839567442076,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/full_loss_grad/Shape",
+                "op": "Shape",
+                "input0": "loss/regularisation/get_regularization_penalty"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567442172,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 17,
+            "name": "loss/regularisation/get_regularization_penalty",
+            "pid": 1,
+            "ts": 1470839567442167,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 17,
+            "name": "loss/regularisation/get_regularization_penalty",
+            "pid": 1,
+            "ts": 1470839567442172,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "MatMul",
+            "args": {
+                "input1": "hidden2/weights/read",
+                "name": "hidden2/MatMul",
+                "op": "MatMul",
+                "input0": "hidden1/activation"
+            },
+            "pid": 1,
+            "dur": 7279,
+            "ts": 1470839567442174,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 18,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567442170,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 18,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567442174,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 19,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567439507,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 19,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567442174,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/hidden2/preactivation_grad/Shape",
+                "op": "Shape",
+                "input0": "hidden2/MatMul"
+            },
+            "pid": 1,
+            "dur": 19,
+            "ts": 1470839567449489,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 20,
+            "name": "hidden2/MatMul",
+            "pid": 1,
+            "ts": 1470839567449453,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 20,
+            "name": "hidden2/MatMul",
+            "pid": 1,
+            "ts": 1470839567449489,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/Shape_1",
+                "name": "gradients/hidden2/preactivation_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/hidden2/preactivation_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567449511,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Add",
+            "args": {
+                "input1": "hidden2/biases/read",
+                "name": "hidden2/preactivation",
+                "op": "Add",
+                "input0": "hidden2/MatMul"
+            },
+            "pid": 1,
+            "dur": 317,
+            "ts": 1470839567449500,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 21,
+            "name": "hidden2/biases/read",
+            "pid": 1,
+            "ts": 1470839567441616,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 21,
+            "name": "hidden2/biases/read",
+            "pid": 1,
+            "ts": 1470839567449500,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Tanh",
+            "args": {
+                "name": "hidden2/activation",
+                "op": "Tanh",
+                "input0": "hidden2/preactivation"
+            },
+            "pid": 1,
+            "dur": 214,
+            "ts": 1470839567449831,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 22,
+            "name": "hidden2/preactivation",
+            "pid": 1,
+            "ts": 1470839567449817,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 22,
+            "name": "hidden2/preactivation",
+            "pid": 1,
+            "ts": 1470839567449831,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/masking/masking_grad/Shape",
+                "op": "Shape",
+                "input0": "hidden2/activation"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567450058,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/masking/masking_grad/Shape_1",
+                "name": "gradients/masking/masking_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/masking/masking_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567450067,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "masking/to_float",
+                "name": "masking/masking",
+                "op": "Mul",
+                "input0": "hidden2/activation"
+            },
+            "pid": 1,
+            "dur": 102,
+            "ts": 1470839567450066,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 23,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567450045,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 23,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567450066,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 24,
+            "name": "masking/to_float",
+            "pid": 1,
+            "ts": 1470839567439347,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 24,
+            "name": "masking/to_float",
+            "pid": 1,
+            "ts": 1470839567450066,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/l2_loss/sub_grad/Shape",
+                "op": "Shape",
+                "input0": "masking/masking"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567450182,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 25,
+            "name": "masking/masking",
+            "pid": 1,
+            "ts": 1470839567450168,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 25,
+            "name": "masking/masking",
+            "pid": 1,
+            "ts": 1470839567450182,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/Shape_1",
+                "name": "gradients/loss/l2_loss/sub_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/l2_loss/sub_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567450193,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input1": "_recv_target_0",
+                "name": "loss/l2_loss/sub",
+                "op": "Sub",
+                "input0": "masking/masking"
+            },
+            "pid": 1,
+            "dur": 126,
+            "ts": 1470839567450185,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Shape",
+                "op": "Shape",
+                "input0": "loss/l2_loss/sub"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567450370,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 26,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450311,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 26,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450370,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/Shape_1",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567450384,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Log",
+            "args": {
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Log",
+                "op": "Log",
+                "input0": "loss/l2_loss/sub"
+            },
+            "pid": 1,
+            "dur": 1297,
+            "ts": 1470839567450332,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Pow",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/sub",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Pow",
+                "op": "Pow",
+                "input0": "loss/l2_loss/sub"
+            },
+            "pid": 1,
+            "dur": 2191,
+            "ts": 1470839567450330,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 27,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450311,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 27,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450330,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "Pow",
+            "args": {
+                "input1": "loss/l2_loss/squared_difference/y",
+                "name": "loss/l2_loss/squared_difference",
+                "op": "Pow",
+                "input0": "loss/l2_loss/sub"
+            },
+            "pid": 1,
+            "dur": 2619,
+            "ts": 1470839567450375,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 3
+        },
+        {
+            "id": 28,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450311,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 28,
+            "name": "loss/l2_loss/sub",
+            "pid": 1,
+            "ts": 1470839567450375,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 29,
+            "name": "loss/l2_loss/squared_difference/y",
+            "pid": 1,
+            "ts": 1470839567437640,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 29,
+            "name": "loss/l2_loss/squared_difference/y",
+            "pid": 1,
+            "ts": 1470839567450375,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "name": "loss/l2_loss/Rank",
+                "op": "Rank",
+                "input0": "loss/l2_loss/squared_difference"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453001,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 30,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567452994,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 30,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567453001,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Shape",
+                "op": "Shape",
+                "input0": "loss/l2_loss/squared_difference"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567453014,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 31,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567452994,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 31,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567453014,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "loss/l2_loss/range/delta",
+                "input1": "loss/l2_loss/Rank",
+                "name": "loss/l2_loss/range",
+                "op": "Range",
+                "input0": "loss/l2_loss/range/start"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567453020,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 32,
+            "name": "loss/l2_loss/range/start",
+            "pid": 1,
+            "ts": 1470839567437648,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 32,
+            "name": "loss/l2_loss/range/start",
+            "pid": 1,
+            "ts": 1470839567453020,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 33,
+            "name": "loss/l2_loss/Rank",
+            "pid": 1,
+            "ts": 1470839567453008,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 33,
+            "name": "loss/l2_loss/Rank",
+            "pid": 1,
+            "ts": 1470839567453020,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 34,
+            "name": "loss/l2_loss/range/delta",
+            "pid": 1,
+            "ts": 1470839567437657,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 34,
+            "name": "loss/l2_loss/range/delta",
+            "pid": 1,
+            "ts": 1470839567453020,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Size",
+            "args": {
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Size",
+                "op": "Size",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453025,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "gradients/loss/l2_loss/summing_square_errors_grad/range/delta",
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Size",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/range",
+                "op": "Range",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/range/start"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453039,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Add",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Size",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/add",
+                "op": "Add",
+                "input0": "loss/l2_loss/range"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567453051,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 35,
+            "name": "loss/l2_loss/range",
+            "pid": 1,
+            "ts": 1470839567453030,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 35,
+            "name": "loss/l2_loss/range",
+            "pid": 1,
+            "ts": 1470839567453051,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mod",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Size",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/mod",
+                "op": "Mod",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/add"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567453064,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Shape_1",
+                "op": "Shape",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/mod"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453078,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Fill",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Fill/value",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Fill",
+                "op": "Fill",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Shape_1"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567453084,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "loss/l2_loss/range",
+                "name": "loss/l2_loss/summing_square_errors",
+                "op": "Sum",
+                "input0": "loss/l2_loss/squared_difference"
+            },
+            "pid": 1,
+            "dur": 55,
+            "ts": 1470839567453034,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 36,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567452994,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 36,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567453034,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "DynamicStitch",
+            "args": {
+                "input3": "gradients/loss/l2_loss/summing_square_errors_grad/Fill",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/DynamicStitch",
+                "op": "DynamicStitch",
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/mod",
+                "input2": "gradients/loss/l2_loss/summing_square_errors_grad/Shape",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/range"
+            },
+            "pid": 1,
+            "dur": 17,
+            "ts": 1470839567453093,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Add",
+            "args": {
+                "input1": "loss/l2_loss/summing_square_errors",
+                "name": "loss/full_loss",
+                "op": "Add",
+                "input0": "loss/regularisation/get_regularization_penalty"
+            },
+            "pid": 1,
+            "dur": 12,
+            "ts": 1470839567453106,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Maximum",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Maximum/y",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Maximum",
+                "op": "Maximum",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/DynamicStitch"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567453115,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/Shape",
+                "op": "Shape",
+                "input0": "loss/full_loss"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453122,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Fill",
+            "args": {
+                "input1": "gradients/Const",
+                "name": "gradients/Fill",
+                "op": "Fill",
+                "input0": "gradients/Shape"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453129,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Div",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/Maximum",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/floordiv",
+                "op": "Div",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567453127,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 37,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Shape",
+            "pid": 1,
+            "ts": 1470839567453022,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 37,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Shape",
+            "pid": 1,
+            "ts": 1470839567453127,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 38,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Maximum",
+            "pid": 1,
+            "ts": 1470839567453123,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 38,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Maximum",
+            "pid": 1,
+            "ts": 1470839567453127,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Shape",
+            "args": {
+                "name": "gradients/loss/full_loss_grad/Shape_1",
+                "op": "Shape",
+                "input0": "loss/l2_loss/summing_square_errors"
+            },
+            "pid": 1,
+            "dur": 44,
+            "ts": 1470839567453100,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 39,
+            "name": "loss/l2_loss/summing_square_errors",
+            "pid": 1,
+            "ts": 1470839567453089,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 39,
+            "name": "loss/l2_loss/summing_square_errors",
+            "pid": 1,
+            "ts": 1470839567453100,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "BroadcastGradientArgs",
+            "args": {
+                "input1": "gradients/loss/full_loss_grad/Shape_1",
+                "name": "gradients/loss/full_loss_grad/BroadcastGradientArgs",
+                "op": "BroadcastGradientArgs",
+                "input0": "gradients/loss/full_loss_grad/Shape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453147,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/full_loss_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/full_loss_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/Fill"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453157,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/full_loss_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/full_loss_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/Fill"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453159,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 40,
+            "name": "gradients/Fill",
+            "pid": 1,
+            "ts": 1470839567453136,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 40,
+            "name": "gradients/Fill",
+            "pid": 1,
+            "ts": 1470839567453159,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/full_loss_grad/Shape",
+                "name": "gradients/loss/full_loss_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/full_loss_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567453168,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/full_loss_grad/Shape_1",
+                "name": "gradients/loss/full_loss_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/full_loss_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567453168,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/full_loss_grad/Reshape_1",
+                "name": "gradients/loss/full_loss_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/full_loss_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567453183,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/full_loss_grad/tuple/group_deps",
+                "name": "gradients/loss/full_loss_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/loss/full_loss_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453189,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/full_loss_grad/tuple/group_deps",
+                "name": "gradients/loss/full_loss_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/loss/full_loss_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 2,
+            "ts": 1470839567453195,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 41,
+            "name": "gradients/loss/full_loss_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453179,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 41,
+            "name": "gradients/loss/full_loss_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453195,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/full_loss_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 1,
+            "ts": 1470839567453199,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/DynamicStitch",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/full_loss_grad/tuple/control_dependency_1"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567453202,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty_grad/tuple/group_deps",
+                "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/loss/full_loss_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567453210,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency_3"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453225,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency_1"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567453222,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 42,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss",
+            "pid": 1,
+            "ts": 1470839567439452,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 42,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss",
+            "pid": 1,
+            "ts": 1470839567453222,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/mul"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567453236,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/mul"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567453236,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Shape",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453249,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Shape",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453251,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency_2"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453258,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453259,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 43,
+            "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567453216,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 43,
+            "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567453259,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 44,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567442135,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 44,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss",
+            "pid": 1,
+            "ts": 1470839567453259,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567453270,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 45,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul",
+            "pid": 1,
+            "ts": 1470839567453266,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 45,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul",
+            "pid": 1,
+            "ts": 1470839567453270,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567453281,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul_1",
+                "op": "Mul",
+                "input0": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567453279,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 46,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale",
+            "pid": 1,
+            "ts": 1470839567437632,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 46,
+            "name": "loss/regularisation/get_regularization_penalty/l2_regularizer/scale",
+            "pid": 1,
+            "ts": 1470839567453279,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 47,
+            "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567453216,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 47,
+            "name": "gradients/loss/regularisation/get_regularization_penalty_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567453279,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/mul"
+            },
+            "pid": 1,
+            "dur": 32,
+            "ts": 1470839567453269,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 48,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/mul",
+            "pid": 1,
+            "ts": 1470839567453265,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 48,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/mul",
+            "pid": 1,
+            "ts": 1470839567453269,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567453293,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 49,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul_1",
+            "pid": 1,
+            "ts": 1470839567453288,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 49,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/mul_1",
+            "pid": 1,
+            "ts": 1470839567453293,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Shape",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567453307,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 50,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum",
+            "pid": 1,
+            "ts": 1470839567453301,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 50,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum",
+            "pid": 1,
+            "ts": 1470839567453307,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453310,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 51,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567453302,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 51,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567453310,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 2,
+            "ts": 1470839567453318,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567453317,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/group_deps",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453324,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 52,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453315,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 52,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453324,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453326,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 2,
+            "ts": 1470839567453333,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/tuple/group_deps",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453338,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 53,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453330,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 53,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/Reshape_1",
+            "pid": 1,
+            "ts": 1470839567453338,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1_grad/tuple/control_dependency_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss_grad/mul",
+                "op": "Mul",
+                "input0": "hidden1/biases/read"
+            },
+            "pid": 1,
+            "dur": 12,
+            "ts": 1470839567453366,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567453383,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453396,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Reshape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567453405,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/group_deps",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567453412,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 144,
+            "ts": 1470839567453293,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 3
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Shape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567453444,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 54,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567453437,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 54,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567453444,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Reshape_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567453454,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/tuple/group_deps",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567453461,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3_grad/tuple/control_dependency_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss_grad/mul",
+                "op": "Mul",
+                "input0": "hidden2/biases/read"
+            },
+            "pid": 1,
+            "dur": 19,
+            "ts": 1470839567453470,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/control_dependency_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss_grad/mul",
+                "op": "Mul",
+                "input0": "hidden1/weights/read"
+            },
+            "pid": 1,
+            "dur": 4224,
+            "ts": 1470839567453331,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 55,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567453328,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 55,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567453331,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Tile",
+            "args": {
+                "input1": "gradients/loss/l2_loss/summing_square_errors_grad/floordiv",
+                "name": "gradients/loss/l2_loss/summing_square_errors_grad/Tile",
+                "op": "Tile",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 5214,
+            "ts": 1470839567453210,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 4
+        },
+        {
+            "id": 56,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Reshape",
+            "pid": 1,
+            "ts": 1470839567453205,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 56,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Reshape",
+            "pid": 1,
+            "ts": 1470839567453210,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 57,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/floordiv",
+            "pid": 1,
+            "ts": 1470839567453136,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 57,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/floordiv",
+            "pid": 1,
+            "ts": 1470839567453210,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/l2_loss/squared_difference/y",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Tile"
+            },
+            "pid": 1,
+            "dur": 253,
+            "ts": 1470839567458488,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 58,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Tile",
+            "pid": 1,
+            "ts": 1470839567458424,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 58,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Tile",
+            "pid": 1,
+            "ts": 1470839567458488,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "loss/l2_loss/squared_difference",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/mul_2",
+                "op": "Mul",
+                "input0": "gradients/loss/l2_loss/summing_square_errors_grad/Tile"
+            },
+            "pid": 1,
+            "dur": 488,
+            "ts": 1470839567458482,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 59,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Tile",
+            "pid": 1,
+            "ts": 1470839567458424,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 4
+        },
+        {
+            "id": 59,
+            "name": "gradients/loss/l2_loss/summing_square_errors_grad/Tile",
+            "pid": 1,
+            "ts": 1470839567458482,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 60,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567452994,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 60,
+            "name": "loss/l2_loss/squared_difference",
+            "pid": 1,
+            "ts": 1470839567458482,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/control_dependency_1",
+                "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss_grad/mul",
+                "op": "Mul",
+                "input0": "hidden2/weights/read"
+            },
+            "pid": 1,
+            "dur": 5578,
+            "ts": 1470839567453420,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 61,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567439507,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 61,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567453420,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 62,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567453416,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 62,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567453420,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/Log",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/mul_3",
+                "op": "Mul",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/mul_2"
+            },
+            "pid": 1,
+            "dur": 223,
+            "ts": 1470839567458984,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 63,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_2",
+            "pid": 1,
+            "ts": 1470839567458970,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 63,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_2",
+            "pid": 1,
+            "ts": 1470839567458984,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 64,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Log",
+            "pid": 1,
+            "ts": 1470839567451629,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 64,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Log",
+            "pid": 1,
+            "ts": 1470839567458984,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/Pow",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/mul_1",
+                "op": "Mul",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/mul"
+            },
+            "pid": 1,
+            "dur": 459,
+            "ts": 1470839567458755,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 3
+        },
+        {
+            "id": 65,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul",
+            "pid": 1,
+            "ts": 1470839567458741,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 65,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul",
+            "pid": 1,
+            "ts": 1470839567458755,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 66,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Pow",
+            "pid": 1,
+            "ts": 1470839567452521,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 66,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Pow",
+            "pid": 1,
+            "ts": 1470839567458755,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567459223,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 67,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_1",
+            "pid": 1,
+            "ts": 1470839567459214,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 3
+        },
+        {
+            "id": 67,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_1",
+            "pid": 1,
+            "ts": 1470839567459223,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/Shape",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567459236,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/mul_3"
+            },
+            "pid": 1,
+            "dur": 67,
+            "ts": 1470839567459220,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 68,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_3",
+            "pid": 1,
+            "ts": 1470839567459207,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 68,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/mul_3",
+            "pid": 1,
+            "ts": 1470839567459220,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/l2_loss/squared_difference_grad/Shape_1",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567459292,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 69,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567459287,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 69,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567459292,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/l2_loss/squared_difference_grad/Reshape_1",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/l2_loss/squared_difference_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567459303,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/l2_loss/squared_difference_grad/tuple/group_deps",
+                "name": "gradients/loss/l2_loss/squared_difference_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567459309,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/BroadcastGradientArgs",
+                "name": "gradients/loss/l2_loss/sub_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567459321,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/BroadcastGradientArgs:1",
+                "name": "gradients/loss/l2_loss/sub_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/loss/l2_loss/squared_difference_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567459324,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 70,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567459315,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 70,
+            "name": "gradients/loss/l2_loss/squared_difference_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567459324,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/Shape",
+                "name": "gradients/loss/l2_loss/sub_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/loss/l2_loss/sub_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567459334,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Neg",
+            "args": {
+                "name": "gradients/loss/l2_loss/sub_grad/Neg",
+                "op": "Neg",
+                "input0": "gradients/loss/l2_loss/sub_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 80,
+            "ts": 1470839567459337,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/Shape_1",
+                "name": "gradients/loss/l2_loss/sub_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/loss/l2_loss/sub_grad/Neg"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567459425,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 71,
+            "name": "gradients/loss/l2_loss/sub_grad/Neg",
+            "pid": 1,
+            "ts": 1470839567459417,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 71,
+            "name": "gradients/loss/l2_loss/sub_grad/Neg",
+            "pid": 1,
+            "ts": 1470839567459425,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/loss/l2_loss/sub_grad/Reshape_1",
+                "name": "gradients/loss/l2_loss/sub_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/loss/l2_loss/sub_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 2,
+            "ts": 1470839567459438,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/loss/l2_loss/sub_grad/tuple/group_deps",
+                "name": "gradients/loss/l2_loss/sub_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/loss/l2_loss/sub_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567459444,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "masking/to_float",
+                "name": "gradients/masking/masking_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/loss/l2_loss/sub_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 200,
+            "ts": 1470839567459455,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/loss/l2_loss/sub_grad/tuple/control_dependency",
+                "name": "gradients/masking/masking_grad/mul_1",
+                "op": "Mul",
+                "input0": "hidden2/activation"
+            },
+            "pid": 1,
+            "dur": 215,
+            "ts": 1470839567459457,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 72,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567450045,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 72,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567459457,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 73,
+            "name": "gradients/loss/l2_loss/sub_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567459449,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 73,
+            "name": "gradients/loss/l2_loss/sub_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567459457,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/masking/masking_grad/BroadcastGradientArgs",
+                "name": "gradients/masking/masking_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/masking/masking_grad/mul"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567459666,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/masking/masking_grad/Shape",
+                "name": "gradients/masking/masking_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/masking/masking_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567459681,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/masking/masking_grad/BroadcastGradientArgs:1",
+                "name": "gradients/masking/masking_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/masking/masking_grad/mul_1"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567459682,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/masking/masking_grad/Shape_1",
+                "name": "gradients/masking/masking_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/masking/masking_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567459696,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 74,
+            "name": "gradients/masking/masking_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567459691,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 74,
+            "name": "gradients/masking/masking_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567459696,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/masking/masking_grad/Reshape_1",
+                "name": "gradients/masking/masking_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/masking/masking_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567459708,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/masking/masking_grad/tuple/group_deps",
+                "name": "gradients/masking/masking_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/masking/masking_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 7,
+            "ts": 1470839567459715,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/hidden2/activation_grad/sub/x",
+                "op": "Const",
+                "input0": "^gradients/masking/masking_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567459732,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Square",
+            "args": {
+                "input1": "^gradients/masking/masking_grad/tuple/control_dependency",
+                "name": "gradients/hidden2/activation_grad/Square",
+                "op": "Square",
+                "input0": "hidden2/activation"
+            },
+            "pid": 1,
+            "dur": 88,
+            "ts": 1470839567459729,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 75,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567450045,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 75,
+            "name": "hidden2/activation",
+            "pid": 1,
+            "ts": 1470839567459729,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input1": "gradients/hidden2/activation_grad/Square",
+                "name": "gradients/hidden2/activation_grad/sub",
+                "op": "Sub",
+                "input0": "gradients/hidden2/activation_grad/sub/x"
+            },
+            "pid": 1,
+            "dur": 86,
+            "ts": 1470839567459823,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 76,
+            "name": "gradients/hidden2/activation_grad/Square",
+            "pid": 1,
+            "ts": 1470839567459817,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 76,
+            "name": "gradients/hidden2/activation_grad/Square",
+            "pid": 1,
+            "ts": 1470839567459823,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/hidden2/activation_grad/sub",
+                "name": "gradients/hidden2/activation_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/masking/masking_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 114,
+            "ts": 1470839567459916,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/BroadcastGradientArgs",
+                "name": "gradients/hidden2/preactivation_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/hidden2/activation_grad/mul"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567460062,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/Shape",
+                "name": "gradients/hidden2/preactivation_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/hidden2/preactivation_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567460075,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/BroadcastGradientArgs:1",
+                "name": "gradients/hidden2/preactivation_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/hidden2/activation_grad/mul"
+            },
+            "pid": 1,
+            "dur": 127,
+            "ts": 1470839567460043,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 77,
+            "name": "gradients/hidden2/activation_grad/mul",
+            "pid": 1,
+            "ts": 1470839567460030,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 77,
+            "name": "gradients/hidden2/activation_grad/mul",
+            "pid": 1,
+            "ts": 1470839567460043,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/Shape_1",
+                "name": "gradients/hidden2/preactivation_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/hidden2/preactivation_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567460173,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 78,
+            "name": "gradients/hidden2/preactivation_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567460170,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 78,
+            "name": "gradients/hidden2/preactivation_grad/Sum_1",
+            "pid": 1,
+            "ts": 1470839567460173,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/hidden2/preactivation_grad/Reshape_1",
+                "name": "gradients/hidden2/preactivation_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/hidden2/preactivation_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 2,
+            "ts": 1470839567460183,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden2/preactivation_grad/tuple/group_deps",
+                "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/hidden2/preactivation_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567460188,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden2/preactivation_grad/tuple/group_deps",
+                "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/hidden2/preactivation_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567460201,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "AddN",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/tuple/control_dependency_1",
+                "name": "gradients/AddN",
+                "op": "AddN",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_3/L2Loss_grad/mul"
+            },
+            "pid": 1,
+            "dur": 15,
+            "ts": 1470839567460210,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "ApplyGradientDescent",
+            "args": {
+                "input2": "gradients/AddN",
+                "input1": "_recv_learning_rate_0",
+                "name": "GradientDescent/update_hidden2/biases/ApplyGradientDescent",
+                "op": "ApplyGradientDescent",
+                "input0": "hidden2/biases"
+            },
+            "pid": 1,
+            "dur": 19,
+            "ts": 1470839567460229,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "MatMul",
+            "args": {
+                "input1": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+                "name": "gradients/hidden2/MatMul_grad/MatMul_1",
+                "op": "MatMul",
+                "input0": "hidden1/activation"
+            },
+            "pid": 1,
+            "dur": 11005,
+            "ts": 1470839567460209,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 79,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567442170,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 79,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567460209,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 80,
+            "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567460193,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 80,
+            "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567460209,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "MatMul",
+            "args": {
+                "input1": "hidden2/weights/read",
+                "name": "gradients/hidden2/MatMul_grad/MatMul",
+                "op": "MatMul",
+                "input0": "gradients/hidden2/preactivation_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 17104,
+            "ts": 1470839567460203,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 81,
+            "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567460193,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 81,
+            "name": "gradients/hidden2/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567460203,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 82,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567439507,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 82,
+            "name": "hidden2/weights/read",
+            "pid": 1,
+            "ts": 1470839567460203,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/hidden2/MatMul_grad/MatMul_1",
+                "name": "gradients/hidden2/MatMul_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/hidden2/MatMul_grad/MatMul"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567477319,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden2/MatMul_grad/tuple/group_deps",
+                "name": "gradients/hidden2/MatMul_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/hidden2/MatMul_grad/MatMul"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567477327,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 83,
+            "name": "gradients/hidden2/MatMul_grad/MatMul",
+            "pid": 1,
+            "ts": 1470839567477307,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 83,
+            "name": "gradients/hidden2/MatMul_grad/MatMul",
+            "pid": 1,
+            "ts": 1470839567477327,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden2/MatMul_grad/tuple/group_deps",
+                "name": "gradients/hidden2/MatMul_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/hidden2/MatMul_grad/MatMul_1"
+            },
+            "pid": 1,
+            "dur": 3,
+            "ts": 1470839567477339,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 84,
+            "name": "gradients/hidden2/MatMul_grad/MatMul_1",
+            "pid": 1,
+            "ts": 1470839567471214,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 84,
+            "name": "gradients/hidden2/MatMul_grad/MatMul_1",
+            "pid": 1,
+            "ts": 1470839567477339,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "gradients/hidden1/activation_grad/sub/x",
+                "op": "Const",
+                "input0": "^gradients/hidden2/MatMul_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567477369,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Square",
+            "args": {
+                "input1": "^gradients/hidden2/MatMul_grad/tuple/control_dependency",
+                "name": "gradients/hidden1/activation_grad/Square",
+                "op": "Square",
+                "input0": "hidden1/activation"
+            },
+            "pid": 1,
+            "dur": 33,
+            "ts": 1470839567477364,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 85,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567442170,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 85,
+            "name": "hidden1/activation",
+            "pid": 1,
+            "ts": 1470839567477364,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input1": "gradients/hidden1/activation_grad/Square",
+                "name": "gradients/hidden1/activation_grad/sub",
+                "op": "Sub",
+                "input0": "gradients/hidden1/activation_grad/sub/x"
+            },
+            "pid": 1,
+            "dur": 58,
+            "ts": 1470839567477412,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 86,
+            "name": "gradients/hidden1/activation_grad/Square",
+            "pid": 1,
+            "ts": 1470839567477397,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 86,
+            "name": "gradients/hidden1/activation_grad/Square",
+            "pid": 1,
+            "ts": 1470839567477412,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/hidden1/activation_grad/sub",
+                "name": "gradients/hidden1/activation_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/hidden2/MatMul_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 63,
+            "ts": 1470839567477478,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/BroadcastGradientArgs:1",
+                "name": "gradients/hidden1/preactivation_grad/Sum_1",
+                "op": "Sum",
+                "input0": "gradients/hidden1/activation_grad/mul"
+            },
+            "pid": 1,
+            "dur": 70,
+            "ts": 1470839567477561,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/Shape_1",
+                "name": "gradients/hidden1/preactivation_grad/Reshape_1",
+                "op": "Reshape",
+                "input0": "gradients/hidden1/preactivation_grad/Sum_1"
+            },
+            "pid": 1,
+            "dur": 16,
+            "ts": 1470839567477643,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/BroadcastGradientArgs",
+                "name": "gradients/hidden1/preactivation_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/hidden1/activation_grad/mul"
+            },
+            "pid": 1,
+            "dur": 15,
+            "ts": 1470839567477670,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/Shape",
+                "name": "gradients/hidden1/preactivation_grad/Reshape",
+                "op": "Reshape",
+                "input0": "gradients/hidden1/preactivation_grad/Sum"
+            },
+            "pid": 1,
+            "dur": 11,
+            "ts": 1470839567477691,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/hidden1/preactivation_grad/Reshape_1",
+                "name": "gradients/hidden1/preactivation_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/hidden1/preactivation_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567477707,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden1/preactivation_grad/tuple/group_deps",
+                "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+                "op": "Identity",
+                "input0": "gradients/hidden1/preactivation_grad/Reshape"
+            },
+            "pid": 1,
+            "dur": 9,
+            "ts": 1470839567477718,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden1/preactivation_grad/tuple/group_deps",
+                "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/hidden1/preactivation_grad/Reshape_1"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567477756,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "AddN",
+            "args": {
+                "input1": "gradients/hidden1/preactivation_grad/tuple/control_dependency_1",
+                "name": "gradients/AddN_2",
+                "op": "AddN",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_1/L2Loss_grad/mul"
+            },
+            "pid": 1,
+            "dur": 24,
+            "ts": 1470839567477773,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "ApplyGradientDescent",
+            "args": {
+                "input2": "gradients/AddN_2",
+                "input1": "_recv_learning_rate_0",
+                "name": "GradientDescent/update_hidden1/biases/ApplyGradientDescent",
+                "op": "ApplyGradientDescent",
+                "input0": "hidden1/biases"
+            },
+            "pid": 1,
+            "dur": 21,
+            "ts": 1470839567477803,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "AddN",
+            "args": {
+                "input1": "gradients/hidden2/MatMul_grad/tuple/control_dependency_1",
+                "name": "gradients/AddN_1",
+                "op": "AddN",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer_2/L2Loss_grad/mul"
+            },
+            "pid": 1,
+            "dur": 3490,
+            "ts": 1470839567477377,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 87,
+            "name": "gradients/hidden2/MatMul_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567477342,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 87,
+            "name": "gradients/hidden2/MatMul_grad/tuple/control_dependency_1",
+            "pid": 1,
+            "ts": 1470839567477377,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "ApplyGradientDescent",
+            "args": {
+                "input2": "gradients/AddN_1",
+                "input1": "_recv_learning_rate_0",
+                "name": "GradientDescent/update_hidden2/weights/ApplyGradientDescent",
+                "op": "ApplyGradientDescent",
+                "input0": "hidden2/weights"
+            },
+            "pid": 1,
+            "dur": 3102,
+            "ts": 1470839567480892,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 88,
+            "name": "gradients/AddN_1",
+            "pid": 1,
+            "ts": 1470839567480867,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 88,
+            "name": "gradients/AddN_1",
+            "pid": 1,
+            "ts": 1470839567480892,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Gather",
+            "args": {
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather",
+                "op": "Gather",
+                "input0": "gradients/hidden1/preactivation_grad/tuple/control_dependency"
+            },
+            "pid": 1,
+            "dur": 9185,
+            "ts": 1470839567477832,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 1
+        },
+        {
+            "id": 89,
+            "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567477727,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 89,
+            "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567477832,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 90,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze",
+            "pid": 1,
+            "ts": 1470839567442106,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 90,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Squeeze",
+            "pid": 1,
+            "ts": 1470839567477832,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input3": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul",
+                "input1": "_recv_x_sparse/values_0",
+                "input2": "_recv_x_sparse/shape_0",
+                "input0": "_recv_x_sparse/indices_0"
+            },
+            "pid": 1,
+            "dur": 10519,
+            "ts": 1470839567481405,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 2
+        },
+        {
+            "id": 91,
+            "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567477727,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 91,
+            "name": "gradients/hidden1/preactivation_grad/tuple/control_dependency",
+            "pid": 1,
+            "ts": 1470839567481405,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "name": "Mul",
+            "args": {
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather_1",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/mul",
+                "op": "Mul",
+                "input0": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather"
+            },
+            "pid": 1,
+            "dur": 5450,
+            "ts": 1470839567487056,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 92,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather",
+            "pid": 1,
+            "ts": 1470839567487017,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 92,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather",
+            "pid": 1,
+            "ts": 1470839567487056,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "id": 93,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather_1",
+            "pid": 1,
+            "ts": 1470839567441661,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 93,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Gather_1",
+            "pid": 1,
+            "ts": 1470839567487056,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "Sum",
+            "args": {
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Sum/reduction_indices",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Sum",
+                "op": "Sum",
+                "input0": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/mul"
+            },
+            "pid": 1,
+            "dur": 1248,
+            "ts": 1470839567492515,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input1": "^gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/Sum",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/tuple/group_deps",
+                "op": "NoOp",
+                "input0": "^gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/SparseTensorDenseMatMul/SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567493777,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input1": "^gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/tuple/group_deps",
+                "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/tuple/control_dependency_1",
+                "op": "Identity",
+                "input0": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/SparseTensorDenseMatMul/SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "dur": 5,
+            "ts": 1470839567493784,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 94,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567491924,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 2
+        },
+        {
+            "id": 94,
+            "name": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+            "pid": 1,
+            "ts": 1470839567493784,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "AddN",
+            "args": {
+                "input1": "gradients/hidden1/SparseTensorDenseMatMul/SparseTensorDenseMatMul_grad/tuple/control_dependency_1",
+                "name": "gradients/AddN_3",
+                "op": "AddN",
+                "input0": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss_grad/mul"
+            },
+            "pid": 1,
+            "dur": 2781,
+            "ts": 1470839567493792,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 95,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss_grad/mul",
+            "pid": 1,
+            "ts": 1470839567457555,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 95,
+            "name": "gradients/loss/regularisation/get_regularization_penalty/l2_regularizer/L2Loss_grad/mul",
+            "pid": 1,
+            "ts": 1470839567493792,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "ApplyGradientDescent",
+            "args": {
+                "input2": "gradients/AddN_3",
+                "input1": "_recv_learning_rate_0",
+                "name": "GradientDescent/update_hidden1/weights/ApplyGradientDescent",
+                "op": "ApplyGradientDescent",
+                "input0": "hidden1/weights"
+            },
+            "pid": 1,
+            "dur": 2406,
+            "ts": 1470839567496596,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "id": 96,
+            "name": "hidden1/weights",
+            "pid": 1,
+            "ts": 1470839567437680,
+            "ph": "s",
+            "cat": "DataFlow",
+            "tid": 1
+        },
+        {
+            "id": 96,
+            "name": "hidden1/weights",
+            "pid": 1,
+            "ts": 1470839567496596,
+            "ph": "t",
+            "cat": "DataFlow",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "input3": "^GradientDescent/update_hidden2/biases/ApplyGradientDescent",
+                "name": "GradientDescent/update",
+                "op": "NoOp",
+                "input1": "^GradientDescent/update_hidden1/biases/ApplyGradientDescent",
+                "input2": "^GradientDescent/update_hidden2/weights/ApplyGradientDescent",
+                "input0": "^GradientDescent/update_hidden1/weights/ApplyGradientDescent"
+            },
+            "pid": 1,
+            "dur": 6,
+            "ts": 1470839567499019,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "GradientDescent/value",
+                "op": "Const",
+                "input0": "^GradientDescent/update"
+            },
+            "pid": 1,
+            "dur": 4,
+            "ts": 1470839567499029,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "AssignAdd",
+            "args": {
+                "input1": "GradientDescent/value",
+                "name": "GradientDescent",
+                "op": "AssignAdd",
+                "input0": "global_step"
+            },
+            "pid": 1,
+            "dur": 8,
+            "ts": 1470839567499036,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "name": "_SINK",
+                "op": "NoOp"
+            },
+            "pid": 1,
+            "dur": 10,
+            "ts": 1470839567499047,
+            "ph": "X",
+            "cat": "Op",
+            "tid": 0
+        }
+    ]
+}

@@ -8,6 +8,10 @@ from tools.tools import global_parameters
 
 import tensorflow as tf
 
+from tensorflow.python.client import timeline
+
+import time
+
 
 class Autoencoder(object):
     def __init__(self, parameters, sets):
@@ -75,6 +79,11 @@ class Autoencoder(object):
             summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
             sess.run(init)
 
+            run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+            run_metadata = tf.RunMetadata()
+
+            start = time.time()
+
             for step in range(self.nb_steps):
                 epoch = float((step // self.epoch_steps))
                 self.Train.learning_rate_update(epoch=epoch)
@@ -82,15 +91,25 @@ class Autoencoder(object):
                                                             x_sparse=x_sparse,
                                                             learning_rate=learning_rate)
                 sess.run(train_op,
-                         feed_dict=feed_dict)
+                         feed_dict=feed_dict,
+                         options=run_options,
+                         run_metadata=run_metadata)
 
-                summary_str = sess.run(summary_op,
-                                       feed_dict=feed_dict)
-                summary_writer.add_summary(summary_str, step)
-                summary_writer.flush()
+                # summary_str = sess.run(summary_op,
+                #                        feed_dict=feed_dict,
+                #                        options=run_options,
+                #                        run_metadata=run_metadata)
+                # summary_writer.add_summary(summary_str, step)
+                # summary_writer.flush()
 
                 # if step == (self.epoch_steps - 1):
+
+            end = time.time()
+            print('training time:' + str(end - start))
+
             print('epoch ' + str(epoch))
+
+            start = time.time()
 
             if not self.is_test:
                 print('Validation Data Eval:')
@@ -111,6 +130,11 @@ class Autoencoder(object):
                                                  is_train=False)
                 print(self.rmse)
 
+            end = time.time()
+            print('Evaluation time:' + str(end - start))
+
+            start = time.time()
+
             print('Train Data Eval:')
             self.rmse_train = self.Evaluation.rmse(sess=sess,
                                                    square_error_batch=square_error,
@@ -126,3 +150,11 @@ class Autoencoder(object):
                                                                   is_train=True,
                                                                   x_sparse=x_sparse,
                                                                   target=target)
+
+            end = time.time()
+            print('differences evaluation time ' + str(end - start))
+
+            tl = timeline.Timeline(run_metadata.step_stats)
+            ctf = tl.generate_chrome_trace_format()
+            with open('timeline.json', 'w') as f:
+                f.write(ctf)
