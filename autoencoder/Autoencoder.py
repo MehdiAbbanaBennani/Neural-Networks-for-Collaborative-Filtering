@@ -104,21 +104,21 @@ class Autoencoder(object):
             else:
                 print('Test Data Eval:')
                 self.rmse = self.Evaluation.rmse(sess=sess,
-                                                square_error_batch=square_error,
-                                                x_sparse=x_sparse,
-                                                target=target,
-                                                data_set=self.Test_set,
-                                                is_train=False)
+                                                 square_error_batch=square_error,
+                                                 x_sparse=x_sparse,
+                                                 target=target,
+                                                 data_set=self.Test_set,
+                                                 is_train=False)
                 print(self.rmse)
 
-            print('Validation Data Eval:')
+            print('Train Data Eval:')
             self.rmse_train = self.Evaluation.rmse(sess=sess,
-                                             square_error_batch=square_error,
-                                             x_sparse=x_sparse,
-                                             target=target,
-                                             data_set=self.Train_set,
-                                             is_train=True)
-            print(self.rmse)
+                                                   square_error_batch=square_error,
+                                                   x_sparse=x_sparse,
+                                                   target=target,
+                                                   data_set=self.Train_set,
+                                                   is_train=True)
+            print(self.rmse_train)
 
             self.difference_matrix = self.Evaluation.differences(difference_op=difference,
                                                                   data_set=self.Train_set,

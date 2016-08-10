@@ -23,7 +23,7 @@ class AutoencoderStability(Autoencoder):
                                                sets_parameters=parameters['sets'],
                                                factorisation_parameters=parameters['factorisation'])
             parameters['stability']['rmse'] = self.Factorization.rmse
-            parameters['stability']['differences'] = self.Factorization.difference_matrix
+            parameters['stability']['differences'] = self.Factorization.difference_matrix.copy()
         else:
             self.Autoencoder = Autoencoder(sets=sets, parameters=parameters)
             self.Autoencoder.run_training()

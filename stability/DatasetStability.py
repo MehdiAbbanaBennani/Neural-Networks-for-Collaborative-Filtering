@@ -37,6 +37,7 @@ class DatasetStability(Dataset):
     def omega_p_build(self):
         probabilities = np.random.rand(self.nb_elements)
         differences = np.absolute(self.differences.data)
+        # TODO Check array size to optimize parameters
         print('check array size to optimize parameters')
         set1 = np.intersect1d(np.where(differences <= self.rmse),
                               np.where(probabilities <= self.probability))

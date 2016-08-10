@@ -103,6 +103,7 @@ class Experiment(object):
         parameters_test['autoencoder']['is_test'] = True
         sets = self.Import.new_sets(is_test=True)
         rmse = self.run_autoencoder(parameters=parameters_test, sets=sets, Autoencoder=self.Autoencoder)
+        parameters_test['rmse']['autoencoder'] = rmse
         self.record_data(parameters=parameters_test)
         return rmse
 
