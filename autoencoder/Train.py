@@ -26,10 +26,30 @@ class Train(object):
                                   name='weights')
             biases = tf.Variable(tf.zeros([output_size]),
                                  name='biases')
-            if name == '1':
-                preactivation = tf.add(tf.sparse_tensor_dense_matmul(input, weights), biases, name='preactivation')
-            else:
-                preactivation = tf.add(tf.matmul(input, weights), biases, name='preactivation')
+
+            preactivation = tf.add(tf.sparse_tensor_dense_matmul(input, weights), biases, name='preactivation')
+
+            activation = tf.nn.tanh(preactivation, name='activation')
+
+            variable_summaries(weights, name='Layer' + name + '/weights')
+            variable_summaries(biases, name='Layer' + name + '/biases')
+            variable_summaries(preactivation, name='Layer' + name + '/preactivation')
+            variable_summaries(activation, name='Layer' + name + '/activation')
+
+            return activation
+
+    @staticmethod
+    def nn_layer2(input, input_size, output_size, name):
+        with tf.name_scope('hidden' + name + '/'):
+            weights_var = 1 / math.sqrt(input_size)
+            weights = tf.Variable(tf.random_uniform(shape=[input_size, output_size],
+                                                    minval=-weights_var,
+                                                    maxval=weights_var),
+                                  name='weights')
+            biases = tf.Variable(tf.zeros([output_size]),
+                                 name='biases')
+
+            preactivation = tf.add(tf.matmul(input, weights), biases, name='preactivation')
             activation = tf.nn.tanh(preactivation, name='activation')
 
             variable_summaries(weights, name='Layer' + name + '/weights')
@@ -52,7 +72,7 @@ class Train(object):
                                     input_size=self.nb_movies,
                                     output_size=hidden1_units,
                                     name='1')
-        activation2 = self.nn_layer(input=activation1,
+        activation2 = self.nn_layer2(input=activation1,
                                     input_size=hidden1_units,
                                     output_size=self.nb_movies,
                                     name='2')

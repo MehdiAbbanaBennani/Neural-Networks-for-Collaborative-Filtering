@@ -95,3 +95,15 @@ def generate_landas(sets_number, samples_number):
 
 def to_sparse2(indices, indptr, values, shape):
     return csr_matrix((values, indices, indptr), shape=shape)
+
+
+def sparse_indices(matrix):
+    index = 0
+    indices = []
+    for k in range(matrix.shape[0]):
+        length = matrix.indptr[index + 1] - matrix.indptr[index]
+        to_add = np.ones(length) * index
+        indices.extend(to_add)
+        index += 1
+    indices = np.asarray(indices)
+    return indices

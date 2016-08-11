@@ -25,24 +25,33 @@ class Dataset(object): # Checked
         ratings = []
         indices_1 = []
         indices_2 = []
+        matrix = self.category_matrix[name]
 
-        index = 0
-        for line_number in range(start, end):
-            new_line_number = self.category_permute[name][line_number]
-            line_values = self.category_matrix[name].getrow(new_line_number).data
-            line_indices_cols = self.category_matrix[name].getrow(new_line_number).indices
-            line_indices_lines = np.ones(np.size(line_indices_cols), dtype=int) * index
-            indices_1.extend(line_indices_lines)
-            indices_2.extend(line_indices_cols)
-            ratings.extend(line_values)
-            index += 1
+        # index = 0
+        # for line_number in range(start, end):
+        #     new_line_number = self.category_permute[name][line_number]
+        #     line = matrix.getrow(new_line_number)
+        #
+        #     line_values = line.data
+        #     line_indices_cols = line.indices
+        #     line_indices_lines = np.ones(np.size(line_indices_cols), dtype=int) * index
+        #
+        #     indices_1.extend(line_indices_lines)
+        #     indices_2.extend(line_indices_cols)
+        #     ratings.extend(line_values)
+        #     index += 1
 
-        indices_1 = np.asarray(indices_1)
-        indices_2 = np.asarray(indices_2)
-        ratings = np.asarray(ratings)
+        indices_1 += [x for list0 in [(np.ones(matrix.getrow(self.category_permute[name][i]).nnz, dtype=int) * (i - start))
+                                      for i in range(start, end)]
+                      for x in list0]
+        indices_2 += [x for list0 in [matrix.getrow(self.category_permute[name][i]).indices for i in range(start, end)]
+                      for x in list0]
+        ratings += [x for list0 in [matrix.getrow(self.category_permute[name][i]).data for i in range(start, end)]
+                    for x in list0]
 
-        ratings = ratings.astype(np.float32)
-        indices = np.asarray(list(zip(indices_1.astype(int), indices_2.astype(int))))
+        ratings = np.asarray(ratings, dtype=np.float32)
+        indices = np.asarray(list(zip(indices_1, indices_2)), dtype=int)
+
         return indices, ratings
 
     def next_range(self, batch_size, name):
@@ -66,15 +75,3 @@ class Dataset(object): # Checked
     def reset(self, name):
         category = self.category_indices[name]
         self.index_completed[category] = 0
-
-    @staticmethod
-    def sparse_indices(matrix):
-        index = 0
-        indices = []
-        for k in range(matrix.shape[0]):
-            length = matrix.indptr[index + 1] - matrix.indptr[index]
-            to_add = np.ones(length) * index
-            indices.extend(to_add)
-            index += 1
-        indices = np.asarray(indices)
-        return indices

@@ -4,18 +4,19 @@ from autoencoder.Autoencoder import Autoencoder
 import numpy as np
 
 autoencoder_parameters_range = {'hidden1_units': [700],
-                                'regularisation': [0.5],
-                                'learning_rate0': np.logspace(-4, -3, num=3),
-                                'learning_decay': np.arange(start=0.1, step=0.1, stop=1),
+                                'regularisation': [0.2],
+                                'learning_rate0': [0.001],
+                                'learning_decay': [0.9],
                                 'batch_size_evaluate': [100],
                                 'batch_size_train': [35],
-                                'nb_epoch': [1],
+                                'nb_epoch': [5],
                                 'is_test': [0]
                                 }
 
-sets_parameters = {'database_id': [2],
+sets_parameters = {'database_id': [1],
                    'test_ratio': [0.1],
-                   'validation_ratio': [0.1]
+                   'validation_ratio': [0.1],
+                   'learning_type': 'U'
                    }
 
 experiment_parameters = {'mean_iterations': [1],

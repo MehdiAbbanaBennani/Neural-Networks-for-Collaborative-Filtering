@@ -50,7 +50,7 @@ class Autoencoder(object):
                                      Train_set=self.Train_set)
 
     def run_training(self):
-        with tf.Graph().as_default():
+        with tf.device('/cpu:0'):
             x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
             target = tf.placeholder(dtype=tf.float32, name='target')
             learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
@@ -71,90 +71,91 @@ class Autoencoder(object):
 
             square_error = self.Evaluation.square_error(prediction, target)
 
-            variable_summaries(loss, 'loss/')
-            variable_summaries(learning_rate, 'learning_rate/')
-            summary_op = tf.merge_all_summaries()
-            init = tf.initialize_all_variables()
-            sess = tf.Session()
-            summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
-            sess.run(init)
+        variable_summaries(loss, 'loss/')
+        variable_summaries(learning_rate, 'learning_rate/')
+        # summary_op = tf.merge_all_summaries()
+        init = tf.initialize_all_variables()
+        sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+        # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
+        sess.run(init)
 
-            run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
-            run_metadata = tf.RunMetadata()
+        run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        run_metadata = tf.RunMetadata()
 
-            start = time.time()
+        start = time.time()
 
-            for step in range(self.nb_steps):
-                epoch = float((step // self.epoch_steps))
-                self.Train.learning_rate_update(epoch=epoch)
-                feed_dict = self.Train.fill_feed_dict_train(target=target,
-                                                            x_sparse=x_sparse,
-                                                            learning_rate=learning_rate)
-                sess.run(train_op,
-                         feed_dict=feed_dict,
-                         options=run_options,
-                         run_metadata=run_metadata)
+        for step in range(self.nb_steps):
+            epoch = float((step // self.epoch_steps))
+            self.Train.learning_rate_update(epoch=epoch)
+            feed_dict = self.Train.fill_feed_dict_train(target=target,
+                                                        x_sparse=x_sparse,
+                                                        learning_rate=learning_rate)
+            sess.run(train_op,
+                     feed_dict=feed_dict,
+                     options=run_options,
+                     run_metadata=run_metadata
+                     )
 
-                # summary_str = sess.run(summary_op,
-                #                        feed_dict=feed_dict,
-                #                        options=run_options,
-                #                        run_metadata=run_metadata)
-                # summary_writer.add_summary(summary_str, step)
-                # summary_writer.flush()
+            # summary_str = sess.run(summary_op,
+            #                        feed_dict=feed_dict,
+            #                        options=run_options,
+            #                        run_metadata=run_metadata)
+            # summary_writer.add_summary(summary_str, step)
+            # summary_writer.flush()
 
-                # if step == (self.epoch_steps - 1):
+            # if step == (self.epoch_steps - 1):
 
-            end = time.time()
-            print('training time:' + str(end - start))
+        end = time.time()
+        print('training time:' + str(end - start))
 
-            print('epoch ' + str(epoch))
+        print('epoch ' + str(epoch))
 
-            start = time.time()
+        start = time.time()
 
-            if not self.is_test:
-                print('Validation Data Eval:')
-                self.rmse = self.Evaluation.rmse(sess=sess,
-                                                 square_error_batch=square_error,
-                                                 x_sparse=x_sparse,
-                                                 target=target,
-                                                 data_set=self.Validation_set,
-                                                 is_train=False)
-                print(self.rmse)
-            else:
-                print('Test Data Eval:')
-                self.rmse = self.Evaluation.rmse(sess=sess,
-                                                 square_error_batch=square_error,
-                                                 x_sparse=x_sparse,
-                                                 target=target,
-                                                 data_set=self.Test_set,
-                                                 is_train=False)
-                print(self.rmse)
+        if not self.is_test:
+            print('Validation Data Eval:')
+            self.rmse = self.Evaluation.rmse(sess=sess,
+                                             square_error_batch=square_error,
+                                             x_sparse=x_sparse,
+                                             target=target,
+                                             data_set=self.Validation_set,
+                                             is_train=False)
+            print(self.rmse)
+        else:
+            print('Test Data Eval:')
+            self.rmse = self.Evaluation.rmse(sess=sess,
+                                             square_error_batch=square_error,
+                                             x_sparse=x_sparse,
+                                             target=target,
+                                             data_set=self.Test_set,
+                                             is_train=False)
+            print(self.rmse)
 
-            end = time.time()
-            print('Evaluation time:' + str(end - start))
+        end = time.time()
+        print('Evaluation time:' + str(end - start))
 
-            start = time.time()
+        start = time.time()
 
-            print('Train Data Eval:')
-            self.rmse_train = self.Evaluation.rmse(sess=sess,
-                                                   square_error_batch=square_error,
-                                                   x_sparse=x_sparse,
-                                                   target=target,
-                                                   data_set=self.Train_set,
-                                                   is_train=True)
-            print(self.rmse_train)
+        print('Train Data Eval:')
+        self.rmse_train = self.Evaluation.rmse(sess=sess,
+                                               square_error_batch=square_error,
+                                               x_sparse=x_sparse,
+                                               target=target,
+                                               data_set=self.Train_set,
+                                               is_train=True)
+        print(self.rmse_train)
 
-            self.difference_matrix = self.Evaluation.differences(difference_op=difference,
-                                                                  data_set=self.Train_set,
-                                                                  sess=sess,
-                                                                  is_train=True,
-                                                                  x_sparse=x_sparse,
-                                                                  target=target)
+        self.difference_matrix = self.Evaluation.differences(difference_op=difference,
+                                                              data_set=self.Train_set,
+                                                              sess=sess,
+                                                              is_train=True,
+                                                              x_sparse=x_sparse,
+                                                              target=target)
 
-            end = time.time()
-            print('differences evaluation time ' + str(end - start))
+        end = time.time()
+        print('differences evaluation time ' + str(end - start))
 
-            tl = timeline.Timeline(run_metadata.step_stats)
-            ctf = tl.generate_chrome_trace_format()
-            with open('timeline.json', 'w') as f:
-                f.write(ctf)
+        tl = timeline.Timeline(run_metadata.step_stats)
+        ctf = tl.generate_chrome_trace_format()
+        with open('timeline.json', 'w') as f:
+            f.write(ctf)

@@ -61,7 +61,7 @@ class Evaluation(object):
             target_values = x_sparse_values
         else:
             target_indices, target_values = data_set.next_batch(batch_size, 'rmse')
-
+        # TODO check the while
         while np.size(x_sparse_indices) == 0:
             x_sparse_indices, x_sparse_values = self.Train_set.next_batch(batch_size, 'rmse')
             if is_train:

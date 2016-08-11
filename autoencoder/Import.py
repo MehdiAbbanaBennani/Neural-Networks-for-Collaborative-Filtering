@@ -10,6 +10,7 @@ class Import(object):
         self.test_ratio = sets_parameters['test_ratio']
         self.nb_users, self.nb_movies = global_parameters(sets_parameters['database_id'])[0:2]
         self.database_id = sets_parameters['database_id']
+        self.learning_type = sets_parameters['learning_type']
 
         self.train_val, self.test = self.first_split()
 
@@ -148,5 +149,19 @@ class Import(object):
         train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
                                                                                                  test)
         sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
+
+        if self.learning_type == 'U':
+            pass
+        elif self.learning_type == 'V':
+            sets = self.transpose_sets(sets)
+        else:
+            raise ValueError('The learning type is U or V')
         return sets
 
+    @staticmethod
+    def transpose_sets(sets):
+        for key1, set1 in sorted(sets.items()):
+            for set_tuple in set1:
+                for set in set_tuple:
+                    set = set.transpose(copy=True).tocsr()
+        return sets
