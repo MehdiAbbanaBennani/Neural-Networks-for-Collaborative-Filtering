@@ -3,6 +3,7 @@ from scipy.sparse import csr_matrix
 
 import numpy as np
 from tools.tools import global_parameters
+from tools.tools import sparse_indices
 
 
 class DatasetStability(Dataset):
@@ -19,7 +20,6 @@ class DatasetStability(Dataset):
         self.subsets_number = stability_parameters['subsets_number']
         self.landa_array = stability_parameters['landa_array']
 
-        # assert np.sum(self.landa_array) == 1
         print(self.landa_array)
         assert np.size(self.landa_array) == self.subsets_number + 1
 
@@ -45,41 +45,53 @@ class DatasetStability(Dataset):
         omega_p_set = np.union1d(set1, set2)
         return omega_p_set
 
-    def belongings(self, set):
+    def belongings_update(self, set):
         belongings = np.random.rand(set.size)
         belongings *= self.subsets_number
         belongings += 1
         belongings = belongings.astype(int)
+        return belongings
 
-    def random_division(self, set):
-        belongings = np.random.rand(set.size)
-        coefficients = np.random.choice(a=self.landa_array[1:(self.nb_elements + 1)],
-                                        size=np.size(set))
-        return coefficients
+    def subsets_sizes_compute(self, belongings):
+        subsets_sizes = np.zeros(self.subsets_number)
+        for i in range(self.subsets_number):
+            subsets_sizes[i] = np.size(np.where(belongings == i + 1))
+        return subsets_sizes
 
-    def loss_coefficients(self, omega_p_set, omega_p_coefficients):
+    def eta_compute(self, subsets_sizes):
+        eta = self.landa_array[0] / self.nb_elements
+        eta += sum([x / y for x, y in zip(self.landa_array, subsets_sizes)])
+        return eta
+
+    def omega_p_coefficients_update(self, belongings, omega_p, eta, subsets_sizes):
+        omega_p_size = np.size(omega_p)
+        omega_p_coefficients = [eta - self.landa_array[belongings[i]] / subsets_sizes[belongings[i]]
+                                for i in range(omega_p_size)]
+        omega_p_coefficients = np.asarray(omega_p_coefficients)
+        return omega_p_coefficients
+
+    def loss_coefficients(self, omega_p_set, omega_p_coefficients, eta):
         loss_coefficients = np.zeros(self.nb_elements)
-
-        # Omega0
-        loss_coefficients += self.landa_array[0]
-
-        # Omega prime
-        loss_coefficients[omega_p_set] += (1 - self.landa_array[0])
-
-        # Removing omega_k
-        loss_coefficients[omega_p_set] = loss_coefficients[omega_p_set] - omega_p_coefficients
-
+        loss_coefficients += eta
+        loss_coefficients[omega_p_set] = omega_p_coefficients
+        print('check that the value changed')
         return loss_coefficients
 
     def coefficients(self, loss_coefficients):
         indices_cols = self.ratings.indices
-        indices_rows = self.sparse_indices(self.ratings)
+        indices_rows = sparse_indices(self.ratings)
         return csr_matrix((loss_coefficients, (indices_rows, indices_cols)),
                           shape=[self.nb_users, self.nb_movies])
 
     def run(self):
         omega_p_set = self.omega_p_build()
-        omega_p_coefficients = self.random_division(omega_p_set)
+        belongings = self.belongings_update(omega_p_set)
+        subsets_sizes = self.subsets_sizes_compute(belongings)
+        eta = self.eta_compute(subsets_sizes)
+        omega_p_coefficients = self.omega_p_coefficients_update(belongings=belongings,
+                                                                omega_p=omega_p_set,
+                                                                eta=eta,
+                                                                subsets_sizes=subsets_sizes)
         loss_coefficients = self.loss_coefficients(omega_p_set=omega_p_set,
                                                    omega_p_coefficients=omega_p_coefficients)
         coefficients = self.coefficients(loss_coefficients=loss_coefficients)
