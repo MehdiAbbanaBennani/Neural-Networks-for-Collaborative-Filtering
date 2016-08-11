@@ -8,14 +8,17 @@ from config.directories import global_parameters_directories
 from config.directories import log_folder_directories
 
 
-def global_parameters(database):
+def global_parameters(sets_parameters):
+    database = sets_parameters['database_id']
+    learning_type = sets_parameters['learning_type']
+
     if database == 0:
-        nb_movies = int(1682)
+        nb_movies = 1682
         nb_users = 943
         data_set_size = 1000209
         data_file = global_parameters_directories['0']
     elif database == 1:
-        nb_movies = int(3952)
+        nb_movies = 3952
         nb_users = 6040
         data_set_size = 1000209
         data_file = global_parameters_directories['1']
@@ -26,6 +29,12 @@ def global_parameters(database):
         data_file = global_parameters_directories['2']
     else:
         print('No such dataset')
+
+    if learning_type == 'V':
+        t = nb_movies
+        nb_movies = nb_users
+        nb_users = t
+
     return nb_users, nb_movies, data_set_size, data_file
 
 

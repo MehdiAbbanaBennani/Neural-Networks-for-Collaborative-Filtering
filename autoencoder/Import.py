@@ -6,17 +6,18 @@ from tools.tools import global_parameters
 
 class Import(object):
     def __init__(self, sets_parameters):
+        self.sets_parameters = sets_parameters
         self.validation_ratio = sets_parameters['validation_ratio']
         self.test_ratio = sets_parameters['test_ratio']
-        self.nb_users, self.nb_movies = global_parameters(sets_parameters['database_id'])[0:2]
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=sets_parameters)[0:2]
         self.database_id = sets_parameters['database_id']
         self.learning_type = sets_parameters['learning_type']
 
         self.train_val, self.test = self.first_split()
 
     @staticmethod
-    def full_import(database_id):
-        data_file = global_parameters(database_id)[3]
+    def full_import(sets_parameters):
+        data_file = global_parameters(sets_parameters)[3]
         database = np.genfromtxt(data_file, delimiter=',')[:, 0:3]
         database[:, 0:2] -= 1
         return database
@@ -68,7 +69,7 @@ class Import(object):
                                       indptr=train_matrix.indptr,
                                       values=output_values_mean,
                                       shape=self.shape())
-        return ratings_sparse, mean_sparse
+        return [ratings_sparse, mean_sparse]
 
     def normalize_test(self, test_matrix, mean_matrix):
 
@@ -102,7 +103,7 @@ class Import(object):
                                       indptr=test_matrix.indptr,
                                       values=output_values_mean,
                                       shape=self.shape())
-        return ratings_sparse, mean_sparse
+        return [ratings_sparse, mean_sparse]
 
     def normalise(self, train, validation, test):
         train_normalised_sets = self.normalize_train(train_matrix=train)
@@ -111,8 +112,8 @@ class Import(object):
         return train_normalised_sets, validation_normalised_sets, test_normalised_sets
 
     def shape(self):
-        nb_users = global_parameters(self.database_id)[0]
-        nb_movies = global_parameters(self.database_id)[1]
+        nb_movies = global_parameters(self.sets_parameters)[0]
+        nb_users = global_parameters(self.sets_parameters)[1]
         shape = (nb_users, nb_movies)
         return shape
 
@@ -129,7 +130,7 @@ class Import(object):
         return csr_matrix((values, (rows, columns)), shape=shape)
 
     def first_split(self):
-        full_dataset = self.full_import(database_id=self.database_id)
+        full_dataset = self.full_import(sets_parameters=self.sets_parameters)
         train_val, test = self.test_split(full_dataset)
         return train_val, test
 
@@ -161,7 +162,7 @@ class Import(object):
     @staticmethod
     def transpose_sets(sets):
         for key1, set1 in sorted(sets.items()):
-            for set_tuple in set1:
-                for set in set_tuple:
-                    set = set.transpose(copy=True).tocsr()
+            for set in set1:
+                set[0] = set[0].transpose(copy=False).tocsr()
+                set[1] = set[1].transpose(copy=False).tocsr()
         return sets

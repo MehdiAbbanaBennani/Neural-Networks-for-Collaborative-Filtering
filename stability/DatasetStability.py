@@ -10,7 +10,7 @@ class DatasetStability(Dataset):
 
         super().__init__(dataset)
 
-        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=sets_parameters)[0:2]
 
         self.differences = stability_parameters['differences']
         self.probability = stability_parameters['probability']

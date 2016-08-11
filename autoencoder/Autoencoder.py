@@ -24,7 +24,7 @@ class Autoencoder(object):
         self.batch_size_evaluate = parameters['autoencoder']['batch_size_evaluate']
         self.batch_size_train = parameters['autoencoder']['batch_size_train']
         self.is_test = parameters['autoencoder']['is_test']
-        self.nb_users, self.nb_movies = global_parameters(database=parameters['sets']['database_id'])[0:2]
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=parameters['sets'])[0:2]
 
         self.difference_matrix = 0
         self.rmse = 0
@@ -39,13 +39,13 @@ class Autoencoder(object):
 
         self.Loss = Loss()
 
-        self.Train = Train(database=self.database,
+        self.Train = Train(sets_parameters=parameters['sets'],
                            Train_set=self.Train_set,
                            batch_size=self.batch_size_train,
                            learning_decay=self.learning_decay,
                            learning_rate0=self.learning_rate0)
 
-        self.Evaluation = Evaluation(database_id=self.database,
+        self.Evaluation = Evaluation(sets_parameters=parameters['sets'],
                                      batch_size_evaluate=self.batch_size_evaluate,
                                      Train_set=self.Train_set)
 

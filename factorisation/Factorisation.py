@@ -7,7 +7,7 @@ from scipy.sparse import csr_matrix
 class Factorisation(object):
     def __init__(self, factorisation_sets, factorisation_parameters, sets_parameters):
 
-        self.nb_users, self.nb_movies = global_parameters(database=sets_parameters['database_id'])[0:2]
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=sets_parameters)[0:2]
 
         self.dimension = factorisation_parameters['dimension']
         self.iterations = factorisation_parameters['iterations']

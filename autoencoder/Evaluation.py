@@ -8,10 +8,10 @@ from tools.tools import to_sparse2
 
 
 class Evaluation(object):
-    def __init__(self, batch_size_evaluate, database_id, Train_set):
+    def __init__(self, batch_size_evaluate, sets_parameters, Train_set):
         self.batch_size_evaluate = batch_size_evaluate
         self.Train_set = Train_set
-        self.nb_users, self.nb_movies = global_parameters(database=database_id)[0:2]
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=sets_parameters)[0:2]
 
     @staticmethod
     def mini_batch_rmse(estimated, target):

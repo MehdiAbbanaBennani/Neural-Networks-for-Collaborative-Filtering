@@ -45,7 +45,7 @@ class AutoencoderStability(Autoencoder):
                                     learning_decay=self.learning_decay,
                                     learning_rate0=self.learning_rate0)
 
-        self.Evaluation = Evaluation(database_id=self.database,
+        self.Evaluation = Evaluation(sets_parameters=parameters['sets'],
                                      batch_size_evaluate=self.batch_size_evaluate,
                                      Train_set=self.Train_set)
 

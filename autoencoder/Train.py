@@ -8,8 +8,8 @@ from tools.tools import variable_summaries
 
 
 class Train(object):
-    def __init__(self, database, Train_set, batch_size, learning_rate0, learning_decay):
-        self.nb_users, self.nb_movies = global_parameters(database=database)[0:2]
+    def __init__(self, sets_parameters, Train_set, batch_size, learning_rate0, learning_decay):
+        self.nb_users, self.nb_movies = global_parameters(sets_parameters=sets_parameters)[0:2]
         self.Train_set = Train_set
         self.batch_size = batch_size
         self.learning_rate0 = learning_rate0
