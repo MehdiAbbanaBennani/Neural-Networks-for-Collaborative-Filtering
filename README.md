@@ -15,4 +15,4 @@ This runs the Autoencoder for 1M dataset under U setting (user setting)
 from config.stability.V_1M import Experiment
 This runs the Stability for 1M dataset under V setting (movie setting)
 
-You can change the experiment parameters under the conf/ subfolder.
+You can change the experiment parameters under the config/ subfolder.
