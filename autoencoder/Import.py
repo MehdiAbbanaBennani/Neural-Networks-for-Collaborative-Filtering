@@ -170,5 +170,4 @@ class Import(object):
         for key1, set1 in sorted(sets.items()):
             for set in set1:
                 set[0] = set[0].transpose(copy=False).tocsr()
-                set[1] = set[1].transpose(copy=False).tocsr()
         return sets

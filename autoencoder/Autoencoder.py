@@ -50,27 +50,26 @@ class Autoencoder(object):
                                      Train_set=self.Train_set)
 
     def run_training(self):
-        for d in ['/cpu:0']:
-            with tf.device(d):
-                x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
-                target = tf.placeholder(dtype=tf.float32, name='target')
-                learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
-                prediction = self.Train.inference(x_sparse=x_sparse,
-                                                  target=target,
-                                                  hidden1_units=self.hidden1_units)
+        x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
+        target = tf.placeholder(dtype=tf.float32, name='target')
+        learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
-                difference = target - prediction
+        prediction = self.Train.inference(x_sparse=x_sparse,
+                                          target=target,
+                                          hidden1_units=self.hidden1_units)
 
-                loss = self.Loss.full_l2_loss(target=target,
-                                              prediction=prediction,
-                                              regularisation=self.regularisation,
-                                              weights_list=tf.trainable_variables())
+        difference = target - prediction
 
-                train_op = self.Train.training(loss=loss,
-                                               optimiser=tf.train.GradientDescentOptimizer(learning_rate=learning_rate))
+        loss = self.Loss.full_l2_loss(target=target,
+                                      prediction=prediction,
+                                      regularisation=self.regularisation,
+                                      weights_list=tf.trainable_variables())
 
-                square_error = self.Evaluation.square_error(prediction, target)
+        train_op = self.Train.training(loss=loss,
+                                       optimiser=tf.train.GradientDescentOptimizer(learning_rate=learning_rate))
+
+        square_error = self.Evaluation.square_error(prediction, target)
 
         variable_summaries(loss, 'loss/')
         variable_summaries(learning_rate, 'learning_rate/')

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH -N 1 -n 4
-#SBATCH --gres=gpu:tesla
+#SBATCH --gres=gpu:K80
 #SBATCH --mem=4096
-#SBATCH --job-name=gpu_test_1M
+#SBATCH --job-name=AU1MGPU
 #SBATCH --time=300:00:00
 
 #SBATCH --mail-type=ALL
