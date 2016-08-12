@@ -12,13 +12,10 @@ sets_parameters = {'database_id': [1],
 experiment_parameters = {'mean_iterations': [1],
                          'nb_draws': [100]
                          }
-<<<<<<< HEAD
-autoencoder_parameters = {'hidden1_units': [500, 550, 600, 650, 700],
-                          'regularisation': [0.02, 0.1],
-=======
+
+
 autoencoder_parameters = {'hidden1_units': [700],
                           'regularisation': [0.2],
->>>>>>> 10M
                           'learning_rate0': [0.001],
                           'learning_decay': [0.9],
                           'batch_size_evaluate': [100],
