@@ -4,14 +4,14 @@ from autoencoder.Autoencoder import Autoencoder
 
 from tools.tools import generate_landas
 
-sets_parameters = {'database_id': [0],
+sets_parameters = {'database_id': [1],
                    'test_ratio': [0.1],
                    'validation_ratio': [0.1],
-                   'learning_type': 'U'
+                   'learning_type': 'V'
                    }
 
 experiment_parameters = {'mean_iterations': [1],
-                         'nb_draws': [1]
+                         'nb_draws': [80]
                          }
 
 

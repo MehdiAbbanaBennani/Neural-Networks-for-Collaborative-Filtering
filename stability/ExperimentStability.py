@@ -2,6 +2,8 @@ from autoencoder.Experiment import Experiment
 
 from stability.ImportStability import ImportStability
 
+import time
+
 
 class ExperimentStability(Experiment):
 

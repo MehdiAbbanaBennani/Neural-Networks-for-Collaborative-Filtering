@@ -39,7 +39,7 @@ class AutoencoderStability(Autoencoder):
 
         self.Loss = LossStability()
 
-        self.Train = TrainStability(database=self.database,
+        self.Train = TrainStability(sets_parameters=parameters['sets'],
                                     Train_set=self.Train_set,
                                     batch_size=self.batch_size_train,
                                     learning_decay=self.learning_decay,

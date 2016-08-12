@@ -116,3 +116,10 @@ def sparse_indices(matrix):
         index += 1
     indices = np.asarray(indices)
     return indices
+
+
+def permute(a, b):
+    t = a
+    a = b
+    b = t
+    return a, b

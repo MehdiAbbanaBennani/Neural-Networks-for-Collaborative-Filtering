@@ -1,7 +1,9 @@
 import numpy as np
 from sklearn.cross_validation import train_test_split
 from scipy.sparse import csr_matrix
+
 from tools.tools import global_parameters
+from tools.tools import permute
 
 
 class Import(object):
@@ -112,8 +114,12 @@ class Import(object):
         return train_normalised_sets, validation_normalised_sets, test_normalised_sets
 
     def shape(self):
-        nb_movies = global_parameters(self.sets_parameters)[0]
-        nb_users = global_parameters(self.sets_parameters)[1]
+        nb_users = global_parameters(self.sets_parameters)[0]
+        nb_movies = global_parameters(self.sets_parameters)[1]
+
+        if self.sets_parameters['learning_type'] == 'V':
+            nb_users, nb_movies = permute(nb_users, nb_movies)
+
         shape = (nb_users, nb_movies)
         return shape
 

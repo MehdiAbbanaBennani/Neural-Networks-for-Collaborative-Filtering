@@ -50,32 +50,36 @@ class Autoencoder(object):
                                      Train_set=self.Train_set)
 
     def run_training(self):
-        with tf.device('/cpu:0'):
-            x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
-            target = tf.placeholder(dtype=tf.float32, name='target')
-            learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
+        for d in ['/cpu:0']:
+            with tf.device(d):
+                x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
+                target = tf.placeholder(dtype=tf.float32, name='target')
+                learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
-            prediction = self.Train.inference(x_sparse=x_sparse,
-                                              target=target,
-                                              hidden1_units=self.hidden1_units)
+                prediction = self.Train.inference(x_sparse=x_sparse,
+                                                  target=target,
+                                                  hidden1_units=self.hidden1_units)
 
-            difference = target - prediction
+                difference = target - prediction
 
-            loss = self.Loss.full_l2_loss(target=target,
-                                          prediction=prediction,
-                                          regularisation=self.regularisation,
-                                          weights_list=tf.trainable_variables())
+                loss = self.Loss.full_l2_loss(target=target,
+                                              prediction=prediction,
+                                              regularisation=self.regularisation,
+                                              weights_list=tf.trainable_variables())
 
-            train_op = self.Train.training(loss=loss,
-                                           optimiser=tf.train.GradientDescentOptimizer(learning_rate=learning_rate))
+                train_op = self.Train.training(loss=loss,
+                                               optimiser=tf.train.GradientDescentOptimizer(learning_rate=learning_rate))
 
-            square_error = self.Evaluation.square_error(prediction, target)
+                square_error = self.Evaluation.square_error(prediction, target)
 
         variable_summaries(loss, 'loss/')
         variable_summaries(learning_rate, 'learning_rate/')
         # summary_op = tf.merge_all_summaries()
         init = tf.initialize_all_variables()
-        sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+
+        server = tf.train.Server.create_local_server()
+
+        sess = tf.Session(target=server.target, config=tf.ConfigProto(log_device_placement=True))
         # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
         sess.run(init)
 
