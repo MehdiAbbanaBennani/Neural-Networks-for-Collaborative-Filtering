@@ -1,3 +1,3 @@
-from config.autoencoder.V_1M import Experiment
+from config.autoencoder.U_10M import Experiment
 
 Experiment.run()

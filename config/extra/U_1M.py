@@ -1,13 +1,13 @@
 from extra_data.ExperimentExtraData import ExperimentExtraData
 from extra_data.AutoencoderExtraData import AutoencoderExtraData
 
-autoencoder_parameters_range = {'hidden1_units': [700],
-                                'regularisation': [0.2],
-                                'learning_rate0': [0.001],
-                                'learning_decay': [0.9],
+autoencoder_parameters_range = {'hidden1_units': [500, 600, 700],
+                                'regularisation': [0.001, 0.01, 0.05, 0.2, 0.5],
+                                'learning_rate0': [0.0001, 0.001, 0.01, 0.1],
+                                'learning_decay': [0.01, 0.1, 0.5, 0.9],
                                 'batch_size_evaluate': [100],
                                 'batch_size_train': [35],
-                                'nb_epoch': [5],
+                                'nb_epoch': [15],
                                 'is_test': [0]
                                 }
 
@@ -20,7 +20,7 @@ sets_parameters = {'database_id': [1],
                    }
 
 experiment_parameters = {'mean_iterations': [1],
-                         'nb_draws': [2]
+                         'nb_draws': [300]
                          }
 
 parameters_range = {'autoencoder': autoencoder_parameters_range,
@@ -30,4 +30,3 @@ parameters_range = {'autoencoder': autoencoder_parameters_range,
 
 Experiment = ExperimentExtraData(parameters_range=parameters_range,
                                  Autoencoder=AutoencoderExtraData)
-Experiment.run()
