@@ -1,7 +1,5 @@
-from autoencoder.Experiment import Experiment
-from autoencoder.Autoencoder import Autoencoder
+from extra_data.ImportExtraData import ImportExtraData
 
-import numpy as np
 
 autoencoder_parameters_range = {'hidden1_units': [700],
                                 'regularisation': [0.2],
@@ -13,10 +11,11 @@ autoencoder_parameters_range = {'hidden1_units': [700],
                                 'is_test': [0]
                                 }
 
-sets_parameters = {'database_id': [1],
-                   'test_ratio': [0.1],
-                   'validation_ratio': [0.1],
-                   'learning_type': 'V'
+sets_parameters = {'database_id': 0,
+                   'test_ratio': 0.1,
+                   'validation_ratio': 0.1,
+                   'learning_type': 'V',
+                   'train_extra_ratio': 0.5
                    }
 
 experiment_parameters = {'mean_iterations': [1],
@@ -28,6 +27,5 @@ parameters_range = {'autoencoder': autoencoder_parameters_range,
                     'sets': sets_parameters
                     }
 
-Experiment = Experiment(parameters_range=parameters_range,
-                        Autoencoder=Autoencoder)
-Experiment.run()
+Import = ImportExtraData(sets_parameters=sets_parameters)
+new_sets = Import.new_sets(is_test=0)

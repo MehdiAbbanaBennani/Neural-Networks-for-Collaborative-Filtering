@@ -73,12 +73,15 @@ class AutoencoderStability(Autoencoder):
 
             square_error = self.Evaluation.square_error(prediction, target)
 
-            variable_summaries(loss, 'loss/')
-            variable_summaries(learning_rate, 'learning_rate/')
-            summary_op = tf.merge_all_summaries()
+            # variable_summaries(loss, 'loss/')
+            # variable_summaries(learning_rate, 'learning_rate/')
+            # summary_op = tf.merge_all_summaries()
+            # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
+
+            server = tf.train.Server.create_local_server()
+
             init = tf.initialize_all_variables()
-            sess = tf.Session()
-            summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
+            sess = tf.Session(target=server.target)
             sess.run(init)
 
             for step in range(self.nb_steps):
@@ -91,10 +94,10 @@ class AutoencoderStability(Autoencoder):
                 sess.run(train_op,
                          feed_dict=feed_dict)
 
-                summary_str = sess.run(summary_op,
-                                       feed_dict=feed_dict)
-                summary_writer.add_summary(summary_str, step)
-                summary_writer.flush()
+                # summary_str = sess.run(summary_op,
+                #                        feed_dict=feed_dict)
+                # summary_writer.add_summary(summary_str, step)
+                # summary_writer.flush()
 
             print('epoch ' + str(epoch))
 

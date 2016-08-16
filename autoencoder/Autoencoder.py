@@ -71,14 +71,14 @@ class Autoencoder(object):
 
         square_error = self.Evaluation.square_error(prediction, target)
 
-        variable_summaries(loss, 'loss/')
-        variable_summaries(learning_rate, 'learning_rate/')
+        # variable_summaries(loss, 'loss/')
+        # variable_summaries(learning_rate, 'learning_rate/')
         # summary_op = tf.merge_all_summaries()
         init = tf.initialize_all_variables()
 
         server = tf.train.Server.create_local_server()
 
-        sess = tf.Session(target=server.target, config=tf.ConfigProto(log_device_placement=True))
+        sess = tf.Session(target=server.target, config=tf.ConfigProto(log_device_placement=False))
         # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
         sess.run(init)
 
