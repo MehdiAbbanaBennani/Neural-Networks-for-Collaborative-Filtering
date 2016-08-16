@@ -43,9 +43,7 @@ class AutoencoderExtraData(Autoencoder):
         # summary_op = tf.merge_all_summaries()
         init = tf.initialize_all_variables()
 
-        server = tf.train.Server.create_local_server()
-
-        sess = tf.Session(target=server.target, config=tf.ConfigProto(log_device_placement=False))
+        sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
         # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
         sess.run(init)
 

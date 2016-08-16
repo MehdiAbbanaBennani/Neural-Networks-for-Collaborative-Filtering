@@ -49,9 +49,7 @@ class Autoencoder(object):
                                      batch_size_evaluate=self.batch_size_evaluate,
                                      Train_set=self.Train_set)
 
-
     def run_training(self):
-
         x_sparse = tf.sparse_placeholder(dtype=tf.float32, name='x_sparse')
         target = tf.placeholder(dtype=tf.float32, name='target')
         learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
@@ -77,9 +75,7 @@ class Autoencoder(object):
         # summary_op = tf.merge_all_summaries()
         init = tf.initialize_all_variables()
 
-        server = tf.train.Server.create_local_server()
-
-        sess = tf.Session(target=server.target, config=tf.ConfigProto(log_device_placement=False))
+        sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
         # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
         sess.run(init)
 

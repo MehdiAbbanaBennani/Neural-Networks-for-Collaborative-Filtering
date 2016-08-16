@@ -36,6 +36,7 @@ class Experiment(object):
         for key, value in sorted(parameters.items()):
             for key2, value2 in sorted(value.items()):
                 parameters_array = np.append(parameters_array, value2)
+        print(parameters_array)
         self.log_data = np.vstack((self.log_data, parameters_array))
 
     def log_to_file(self):

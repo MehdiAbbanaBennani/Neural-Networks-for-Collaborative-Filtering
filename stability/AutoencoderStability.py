@@ -78,10 +78,8 @@ class AutoencoderStability(Autoencoder):
             # summary_op = tf.merge_all_summaries()
             # summary_writer = tf.train.SummaryWriter(summary_folder('logs'), sess.graph)
 
-            server = tf.train.Server.create_local_server()
-
             init = tf.initialize_all_variables()
-            sess = tf.Session(target=server.target)
+            sess = tf.Session()
             sess.run(init)
 
             for step in range(self.nb_steps):

@@ -14,7 +14,6 @@ class ExperimentExtraData(Experiment):
                                          'extra': 3}
         self.log_data = self.log_data_header()
 
-
     def run(self):
         for i in self.frange(0., 1., 0.1):
             self.parameters_range['sets']['train_extra_ratio'] = i

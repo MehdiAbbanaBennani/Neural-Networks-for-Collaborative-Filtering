@@ -1,10 +1,11 @@
 #!/bin/bash
 
 #SBATCH -N 1 -n 4
-#SBATCH --gres=gpu:tesla
 #SBATCH --mem=4096
-#SBATCH --job-name=AU10MGPU
+#SBATCH --job-name=EU1G
 #SBATCH --time=300:00:00
+
+#SBATCH --gres=gpu:K80
 
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mehdi.abbana-bennani@inria.fr

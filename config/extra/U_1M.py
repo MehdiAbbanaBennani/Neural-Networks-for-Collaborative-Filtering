@@ -2,8 +2,8 @@ from extra_data.ExperimentExtraData import ExperimentExtraData
 from extra_data.AutoencoderExtraData import AutoencoderExtraData
 
 autoencoder_parameters_range = {'hidden1_units': [500, 600, 700],
-                                'regularisation': [0.001, 0.01, 0.05, 0.2, 0.5],
-                                'learning_rate0': [0.0001, 0.001, 0.01, 0.1],
+                                'regularisation': [0.01, 0.05, 0.2, 0.5],
+                                'learning_rate0': [0.0001, 0.001, 0.01],
                                 'learning_decay': [0.01, 0.1, 0.5, 0.9],
                                 'batch_size_evaluate': [100],
                                 'batch_size_train': [35],
@@ -20,7 +20,7 @@ sets_parameters = {'database_id': [1],
                    }
 
 experiment_parameters = {'mean_iterations': [1],
-                         'nb_draws': [300]
+                         'nb_draws': [10]
                          }
 
 parameters_range = {'autoencoder': autoencoder_parameters_range,
