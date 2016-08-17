@@ -83,8 +83,10 @@ class Experiment(object):
                                         sets=sets,
                                         Autoencoder=self.Autoencoder)
             rmse_mean += rmse
+
         rmse_mean /= self.parameters_range['experiments']['mean_iterations'][0]
         parameters['rmse']['autoencoder'] = rmse_mean
+        print(parameters)
         self.record_data(parameters=parameters)
         return rmse_mean
 

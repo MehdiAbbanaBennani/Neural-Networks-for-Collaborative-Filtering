@@ -87,7 +87,7 @@ class Import(object):
             if np.size(line) > 0:
                 line_train_mean = mean_matrix.getrow(line_number).data[0]
                 line.data -= line_train_mean
-                assert line.mean() < 1e-1
+                # assert line.mean() < 2e-1
 
                 # Append to the arrays
                 mean_array = np.ones(np.size(line.data)) * line_train_mean

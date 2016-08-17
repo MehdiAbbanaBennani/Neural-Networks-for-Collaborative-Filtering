@@ -40,7 +40,7 @@ class ImportExtraData(Import):
 
         x_train, x_extra, y_train, y_extra = train_test_split(x_train,
                                                               y_train,
-                                                              test_size=self.sets_parameters['train_extra_ratio'],
+                                                              test_size=(1 - self.sets_parameters['train_extra_ratio']),
                                                               random_state=11)
 
         return self.to_sparse1(x_train, y_train, self.shape()), \
@@ -69,3 +69,47 @@ class ImportExtraData(Import):
 
         return sets
 
+    def normalize_test(self, test_matrix, mean_matrix):
+
+        output_values_ratings = []
+        output_values_mean = []
+
+        test_matrix.data -= 3
+        test_matrix.data /= 2
+
+        for line_number in range(test_matrix.shape[0]):
+            # Normalise the line
+            line = test_matrix.getrow(line_number)
+            line_train = mean_matrix.getrow(line_number)
+            if np.size(line_train) == 0 and np.size(line) > 0:
+                line_mean = np.mean(line.data)
+                line.data -= line_mean
+
+                # Append to the arrays
+                mean_array = np.ones(np.size(line.data)) * line_mean
+                output_values_mean.extend(mean_array)
+                output_values_ratings.extend(line.data)
+
+            else:
+                if np.size(line) > 0:
+                    line_train_mean = mean_matrix.getrow(line_number).data[0]
+                    line.data -= line_train_mean
+                    # assert line.mean() < 2e-1
+
+                    # Append to the arrays
+                    mean_array = np.ones(np.size(line.data)) * line_train_mean
+                    output_values_mean.extend(mean_array)
+                    output_values_ratings.extend(line.data)
+
+        output_values_mean = np.asarray(output_values_mean)
+        output_values_ratings = np.asarray(output_values_ratings)
+
+        ratings_sparse = self.to_sparse2(indices=test_matrix.indices,
+                                         indptr=test_matrix.indptr,
+                                         values=output_values_ratings,
+                                         shape=self.shape())
+        mean_sparse = self.to_sparse2(indices=test_matrix.indices,
+                                      indptr=test_matrix.indptr,
+                                      values=output_values_mean,
+                                      shape=self.shape())
+        return [ratings_sparse, mean_sparse]

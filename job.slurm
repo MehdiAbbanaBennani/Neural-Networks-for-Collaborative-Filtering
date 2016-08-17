@@ -5,8 +5,6 @@
 #SBATCH --job-name=EU1G
 #SBATCH --time=300:00:00
 
-#SBATCH --gres=gpu:K80
-
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mehdi.abbana-bennani@inria.fr
 

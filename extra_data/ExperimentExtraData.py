@@ -15,17 +15,11 @@ class ExperimentExtraData(Experiment):
         self.log_data = self.log_data_header()
 
     def run(self):
-        for i in self.frange(0., 1., 0.1):
-            self.parameters_range['sets']['train_extra_ratio'] = i
+        for i in range(1, 10, 1):
+            self.parameters_range['sets']['train_extra_ratio'][0] = i/10
             self.autoencoder_experiment()
+            self.reset_best_parameters()
         self.log_to_file()
-
-    @staticmethod
-    def frange(start, stop, step):
-        i = start
-        while i < stop:
-            yield i
-        i += step
 
     @staticmethod
     def run_autoencoder(parameters, sets, Autoencoder):
@@ -40,6 +34,8 @@ class ExperimentExtraData(Experiment):
     def autoencoder_fixed_parameters(self, parameters):
         rmse_mean = 0
         rmse_extra_mean = 0
+        self.Import.sets_parameters = parameters['sets']
+
         for i in range(self.parameters_range['experiments']['mean_iterations'][0]):
             sets = self.Import.new_sets(is_test=False)
             rmse, rmse_extra = self.run_autoencoder(parameters=parameters,
@@ -53,6 +49,8 @@ class ExperimentExtraData(Experiment):
 
         parameters['rmse']['autoencoder'] = rmse_mean
         parameters['rmse']['extra'] = rmse_extra_mean
+
+        print(parameters)
 
         self.record_data(parameters=parameters)
         return rmse_mean, rmse_extra_mean
@@ -79,4 +77,15 @@ class ExperimentExtraData(Experiment):
         parameters_test['rmse']['autoencoder'] = rmse
         parameters_test['rmse']['extra'] = rmse_extra
         self.record_data(parameters=parameters_test)
-        return rmse
+        return rmse, rmse_extra
+
+    def autoencoder_experiment(self):
+        best_parameters = self.best_parameters_search()
+        print('\n Best parameters')
+        print(best_parameters)
+        self.test_set_evaluation(best_parameters)
+
+    def reset_best_parameters(self):
+        for key, value in self.best_parameters['autoencoder']['rmse'].items():
+            self.best_parameters['autoencoder']['rmse'][key] = 3
+
