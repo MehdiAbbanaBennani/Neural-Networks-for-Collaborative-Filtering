@@ -66,11 +66,11 @@ class Import(object):
         ratings_sparse = self.to_sparse2(indices=train_matrix.indices,
                                          indptr=train_matrix.indptr,
                                          values=output_values_ratings,
-                                         shape=self.shape())
+                                         shape=train_matrix.shape)
         mean_sparse = self.to_sparse2(indices=train_matrix.indices,
                                       indptr=train_matrix.indptr,
                                       values=output_values_mean,
-                                      shape=self.shape())
+                                      shape=train_matrix.shape)
         return [ratings_sparse, mean_sparse]
 
     def normalize_test(self, test_matrix, mean_matrix):
@@ -84,15 +84,27 @@ class Import(object):
         for line_number in range(test_matrix.shape[0]):
             # Normalise the line
             line = test_matrix.getrow(line_number)
-            if np.size(line) > 0:
-                line_train_mean = mean_matrix.getrow(line_number).data[0]
-                line.data -= line_train_mean
-                # assert line.mean() < 2e-1
+            line_train = mean_matrix.getrow(line_number)
+
+            if np.size(line_train) == 0 and np.size(line) > 0:
+                line_mean = np.mean(line.data)
+                line.data -= line_mean
 
                 # Append to the arrays
-                mean_array = np.ones(np.size(line.data)) * line_train_mean
+                mean_array = np.ones(np.size(line.data)) * line_mean
                 output_values_mean.extend(mean_array)
                 output_values_ratings.extend(line.data)
+
+            else:
+                if np.size(line) > 0:
+                    line_train_mean = mean_matrix.getrow(line_number).data[0]
+                    line.data -= line_train_mean
+                    # assert line.mean() < 2e-1
+
+                    # Append to the arrays
+                    mean_array = np.ones(np.size(line.data)) * line_train_mean
+                    output_values_mean.extend(mean_array)
+                    output_values_ratings.extend(line.data)
 
         output_values_mean = np.asarray(output_values_mean)
         output_values_ratings = np.asarray(output_values_ratings)
@@ -100,11 +112,11 @@ class Import(object):
         ratings_sparse = self.to_sparse2(indices=test_matrix.indices,
                                          indptr=test_matrix.indptr,
                                          values=output_values_ratings,
-                                         shape=self.shape())
+                                         shape=test_matrix.shape)
         mean_sparse = self.to_sparse2(indices=test_matrix.indices,
                                       indptr=test_matrix.indptr,
                                       values=output_values_mean,
-                                      shape=self.shape())
+                                      shape=test_matrix.shape)
         return [ratings_sparse, mean_sparse]
 
     def normalise(self, train, validation, test):
@@ -153,16 +165,20 @@ class Import(object):
     def new_sets(self, is_test):
         sets = {}
         train, validation, test = self.split_dataset(is_test)
-        train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
-                                                                                                 test)
-        sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
 
         if self.learning_type == 'U':
             pass
         elif self.learning_type == 'V':
-            sets = self.transpose_sets(sets)
+            train = train.transpose(copy=False).tocsr()
+            validation = validation.transpose(copy=False).tocsr()
+            test = test.transpose(copy=False).tocsr()
         else:
             raise ValueError('The learning type is U or V')
+
+        train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
+                                                                                                 test)
+        sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
+
         return sets
 
     @staticmethod
