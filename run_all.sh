@@ -31,3 +31,7 @@ sbatch job.slurm
 sed -i '1s/.*/from config.stability.V_10M import Experiment/' main.py
 sed -i '5s/.*/#SBATCH --job-name=SV10C/' job.slurm
 sbatch job.slurm
+
+sed -i '1s/.*/from config.extra.U_1M import Experiment' main.py
+sed -i '5s/.*/#SBATCH --job-name=EU1C/' job.slurm
+sbatch job.slurm

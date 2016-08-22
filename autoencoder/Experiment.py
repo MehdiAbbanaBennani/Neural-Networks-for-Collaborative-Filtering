@@ -36,7 +36,6 @@ class Experiment(object):
         for key, value in sorted(parameters.items()):
             for key2, value2 in sorted(value.items()):
                 parameters_array = np.append(parameters_array, value2)
-        print(parameters_array)
         self.log_data = np.vstack((self.log_data, parameters_array))
 
     def log_to_file(self):
@@ -70,8 +69,16 @@ class Experiment(object):
         Autoencoder1 = Autoencoder(parameters=parameters, sets=sets)
         Autoencoder1.run_training()
         rmse = Autoencoder1.rmse
+
+        print("\n")
+        print("--- parameters ---")
+        print(parameters)
+        print("--- rmse ---")
         print(rmse)
         print("--- %s seconds ---" % (time.time() - start_time))
+        print("----------------------------------------")
+        print("\n")
+
         del Autoencoder1
         return rmse
 
@@ -86,7 +93,6 @@ class Experiment(object):
 
         rmse_mean /= self.parameters_range['experiments']['mean_iterations'][0]
         parameters['rmse']['autoencoder'] = rmse_mean
-        print(parameters)
         self.record_data(parameters=parameters)
         return rmse_mean
 
@@ -94,7 +100,6 @@ class Experiment(object):
         for i in range(self.parameters_range['experiments']['nb_draws'][0]):
             parameters = self.select_parameters(parameters_range=self.parameters_range)
             parameters['autoencoder']['is_test'] = False
-            print(parameters)
             rmse = self.autoencoder_fixed_parameters(parameters=parameters)
             if rmse < self.best_parameters['autoencoder']['rmse']['autoencoder']:
                 parameters['rmse']['autoencoder'] = rmse
