@@ -42,9 +42,6 @@ class DatasetStability(Dataset):
         probabilities = np.random.rand(self.nb_elements)
         differences = np.absolute(self.differences.data)
 
-        # TODO Check array size to optimize parameters
-        print('check array size to optimize parameters')
-
         set1 = np.intersect1d(np.where(differences <= self.rmse),
                               np.where(probabilities <= self.probability))
         set2 = np.intersect1d(np.where(differences > self.rmse),
@@ -61,26 +58,25 @@ class DatasetStability(Dataset):
     def subsets_sizes_compute(self, belongings):
         subsets_sizes = np.zeros(self.subsets_number)
         for i in range(self.subsets_number):
-            subsets_sizes[i] = np.size(np.where(belongings == i))
+            subsets_sizes[i] = np.size(belongings) - np.size(np.where(belongings == i))
         return subsets_sizes
 
     def eta_compute(self, subsets_sizes):
         eta = self.landa_array[0] / self.nb_elements
-        eta += sum([x / y for x, y in zip(self.landa_array, subsets_sizes)])
+        eta += sum([x / y for x, y in zip(self.landa_array[1:np.size(self.landa_array)], subsets_sizes)])
         return eta
 
     def omega_p_coefficients_update(self, belongings, omega_p, eta, subsets_sizes):
         omega_p_size = np.size(omega_p)
-        assert np.sum(subsets_sizes) == omega_p_size
 
-        omega_p_coefficients = [eta - self.landa_array[belongings[i]] / subsets_sizes[belongings[i]]
+        omega_p_coefficients = [eta - self.landa_array[belongings[i]+1] / subsets_sizes[belongings[i]]
                                 for i in range(omega_p_size)]
         omega_p_coefficients = np.asarray(omega_p_coefficients)
         return omega_p_coefficients
 
-    def loss_coefficients(self, omega_p_set, omega_p_coefficients, eta):
+    def loss_coefficients(self, omega_p_set, omega_p_coefficients):
         loss_coefficients = np.zeros(self.nb_elements)
-        loss_coefficients += eta
+        loss_coefficients += self.landa_array[0] / self.nb_elements
         loss_coefficients[omega_p_set] = omega_p_coefficients
         print('check that the value changed')
         return loss_coefficients
@@ -101,8 +97,7 @@ class DatasetStability(Dataset):
                                                                 eta=eta,
                                                                 subsets_sizes=subsets_sizes)
         loss_coefficients = self.loss_coefficients(omega_p_set=omega_p_set,
-                                                   omega_p_coefficients=omega_p_coefficients,
-                                                   eta=eta)
+                                                   omega_p_coefficients=omega_p_coefficients)
         coefficients = self.coefficients(loss_coefficients=loss_coefficients)
         return coefficients
 

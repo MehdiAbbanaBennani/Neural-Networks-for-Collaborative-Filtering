@@ -18,7 +18,7 @@ sets_parameters = {'database_id': [2],
                    }
 
 experiment_parameters = {'mean_iterations': [1],
-                         'nb_draws': [5]
+                         'nb_draws': [1]
                          }
 
 parameters_range = {'autoencoder': autoencoder_parameters_range,

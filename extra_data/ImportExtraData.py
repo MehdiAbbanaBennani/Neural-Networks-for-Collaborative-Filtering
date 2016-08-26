@@ -52,6 +52,15 @@ class ImportExtraData(Import):
         sets = {}
         train, validation, test, extra = self.split_dataset_extra(is_test)
 
+        if self.learning_type == 'U':
+            pass
+        elif self.learning_type == 'V':
+            train = train.transpose(copy=False).tocsr()
+            validation = validation.transpose(copy=False).tocsr()
+            test = test.transpose(copy=False).tocsr()
+        else:
+            raise ValueError('The learning type is U or V')
+
         train_normalised_sets, validation_normalised_sets, test_normalised_sets = self.normalise(train, validation,
                                                                                                  test)
         extra_normalised_sets = self.normalize_test(test_matrix=extra, mean_matrix=train_normalised_sets[1])
@@ -59,12 +68,5 @@ class ImportExtraData(Import):
 
         sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
         sets['extra'] = [extra_normalised_sets, validation_normalised_sets, test_normalised_sets]
-
-        if self.learning_type == 'U':
-            pass
-        elif self.learning_type == 'V':
-            sets = self.transpose_sets(sets)
-        else:
-            raise ValueError('The learning type is U or V')
 
         return sets

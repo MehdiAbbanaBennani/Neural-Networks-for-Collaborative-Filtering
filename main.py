@@ -1,3 +1,3 @@
-from config.extra.U_1M import Experiment
+from config.stability.U_1M import Experiment
 
 Experiment.run()

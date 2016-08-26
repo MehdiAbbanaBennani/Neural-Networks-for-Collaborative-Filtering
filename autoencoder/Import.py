@@ -180,10 +180,3 @@ class Import(object):
         sets['autoencoder'] = [train_normalised_sets, validation_normalised_sets, test_normalised_sets]
 
         return sets
-
-    @staticmethod
-    def transpose_sets(sets):
-        for key1, set1 in sorted(sets.items()):
-            for set in set1:
-                set[0] = set[0].transpose(copy=False).tocsr()
-        return sets

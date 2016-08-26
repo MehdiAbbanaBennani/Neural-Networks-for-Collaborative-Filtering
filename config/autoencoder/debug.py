@@ -1,22 +1,20 @@
 from autoencoder.Experiment import Experiment
 from autoencoder.Autoencoder import Autoencoder
 
-import numpy as np
-
-autoencoder_parameters_range = {'hidden1_units': [700],
+autoencoder_parameters_range = {'hidden1_units': [500],
                                 'regularisation': [0.2],
                                 'learning_rate0': [0.001],
                                 'learning_decay': [0.9],
                                 'batch_size_evaluate': [100],
                                 'batch_size_train': [35],
-                                'nb_epoch': [5],
+                                'nb_epoch': [15],
                                 'is_test': [0]
                                 }
 
-sets_parameters = {'database_id': [0],
+sets_parameters = {'database_id': [1],
                    'test_ratio': [0.1],
                    'validation_ratio': [0.1],
-                   'learning_type': 'V'
+                   'learning_type': 'U'
                    }
 
 experiment_parameters = {'mean_iterations': [1],
@@ -30,4 +28,3 @@ parameters_range = {'autoencoder': autoencoder_parameters_range,
 
 Experiment = Experiment(parameters_range=parameters_range,
                         Autoencoder=Autoencoder)
-Experiment.run()

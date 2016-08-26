@@ -15,7 +15,7 @@ class ExperimentExtraData(Experiment):
         self.log_data = self.log_data_header()
 
     def run(self):
-        for i in range(1, 10, 1):
+        for i in range(1, self.parameters_range['experiments']['division'][0], 1):
             self.parameters_range['sets']['train_extra_ratio'][0] = i/10
             self.autoencoder_experiment()
             self.reset_best_parameters()

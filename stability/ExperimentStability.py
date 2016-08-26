@@ -69,12 +69,12 @@ class ExperimentStability(Experiment):
         for key in self.best_parameters:
             self.best_parameters[key]['autoencoder']['is_test'] = True
 
-            sets = self.Import.new_sets(is_test=True)
-            rmse = self.three_runs(parameters=self.best_parameters[key],
-                                   sets=sets)
+        sets = self.Import.new_sets(is_test=True)
+        rmse = self.three_runs(parameters=self.best_parameters[key],
+                               sets=sets)
 
-            self.best_parameters[key]['rmse'] = rmse
-            self.record_data(parameters=self.best_parameters[key])
+        self.best_parameters[key]['rmse'] = rmse
+        self.record_data(parameters=self.best_parameters[key])
 
     def best_parameters_search(self):
         for i in range(self.parameters_range['experiments']['nb_draws'][0]):
