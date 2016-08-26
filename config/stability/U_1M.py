@@ -11,7 +11,7 @@ sets_parameters = {'database_id': [1],
                    }
 
 experiment_parameters = {'mean_iterations': [1],
-                         'nb_draws': [2]
+                         'nb_draws': [20]
                          }
 
 
