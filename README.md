@@ -1,4 +1,6 @@
-# Autoencoder-Stability
+# Neural networks for Collaborative Filtering
+
+In order to run the code you need Tensorflow 0.10 and up, and Python3
 
 You can download the datasets by using the import.sh script from the bash subfloder
 In order to specify the Dataset, you should add an option next to the script
