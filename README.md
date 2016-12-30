@@ -1,6 +1,12 @@
 # Neural networks for Collaborative Filtering
 
-In order to run the code you need Tensorflow 0.10 and up, and Python3
+Required packages :
+Tensorflow 0.10
+Python 3.5
+Scikit-learn 0.17
+Numpy 
+Scipy
+The code was developped under this versions of the packages, it might be incompatible with some newer versions due to the depreciation of some functions.
 
 You can download the datasets by using the import.sh script from the bash subfloder
 In order to specify the Dataset, you should add an option next to the script
@@ -18,5 +24,3 @@ from config.stability.V_1M import Experiment
 This runs the Stability for 1M dataset under V setting (movie setting)
 
 You can change the experiment parameters under the config/ subfolder.
-
-A setup script will be added soon.
